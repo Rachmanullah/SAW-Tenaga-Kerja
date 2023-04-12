@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Kanit-Black';
+    src: url('/public/assets/font/Kanit-Black.ttf');
+    font-family: 'Kanit-BlackItalic';
+    src: url('/public/assets/font/Kanit-BlackItalic.ttf');
+    font-family: 'TitilliumWeb-Bold';
+    src: url('/public/assets/font/TitilliumWeb-Bold.ttf');
+    font-family: 'TitilliumWeb-Regular';
+    src: url('/public/assets/font/TitilliumWeb-Regular.ttf');
+    font-family: 'TitilliumWeb-Black';
+    src: url('/public/assets/font/TitilliumWeb-Black.ttf');
+    font-family: 'TitilliumWeb-BoldItalic';
+    src: url('/public/assets/font/TitilliumWeb-BoldItalic.ttf');
+}
