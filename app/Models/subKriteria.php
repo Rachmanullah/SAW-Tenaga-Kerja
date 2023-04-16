@@ -19,6 +19,6 @@ class subKriteria extends Model
     }
     public function opsis()
     {
-        return $this->hasMany(Opsi::class, 'id');
+        return $this->hasMany(Opsi::class);
     }
 }

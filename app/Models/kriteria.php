@@ -21,6 +21,6 @@ class kriteria extends Model
 
     public function subKriterias()
     {
-        return $this->hasMany(subKriteria::class, 'id');
+        return $this->hasMany(subKriteria::class);
     }
 }

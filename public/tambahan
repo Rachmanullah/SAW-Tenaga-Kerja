@@ -8,3 +8,74 @@
 
  jika sub kriteria ada id kriteria maka tampilkan input nilai sub kriteria
  jika sub kriteria tidak ada id kriteria maka tampilkan input nilai kriteria.
+
+ <div>
+     <label for="{{ str_replace(' ', '_', $bobotLowkers->kriterias->kriteria) }}" class="block mb-2 text-sm font-medium text-gray-900 ">{{ $bobotLowkers->kriterias->kriteria }}</label>
+     <input type="text" name="{{ str_replace(' ', '_', $bobotLowkers->kriterias->kriteria) }}" id="{{ str_replace(' ', '_', $bobotLowkers->kriterias->kriteria) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="{{ str_replace(' ', '_', $bobotLowkers->kriterias->kriteria) }}" required autocomplete="off">
+ </div>
+
+ @foreach($bobotLowker as $bobotLowkers)
+ @foreach($kriteria as $kriterias)
+ @if($kriterias->id == $bobotLowkers->kriteria_id)
+ @foreach($subKriteria as $subKriterias)
+ @if($subKriterias->kriteria_id == $kriterias->id)
+ @foreach($opsi as $opsis)
+ @if($opsis->sub_kriteria_id == $subKriterias->id)
+ {{ $opsis->opsi }}
+ @endif
+ @endforeach
+ @elseif(!$subKriterias->kriteria_id == $kriterias->id)
+ {{ $kriterias->kriteria }}
+ @endif
+ @endforeach
+ @endif
+ @endforeach
+ @endforeach
+
+ //$lowongan = lowongan::find($id);
+ $bobotLowker = bobotLowker::where('lowongan_id', $id)->get();
+ $opsi = "S1";
+ $opsi2 = "Ada";
+ $opsi3 = ">2";
+ $nilaiAlternatif = 0;
+ // $kriteria = kriteria::where('id', $bobotLowker->kriteria_id)->get();
+ foreach ($bobotLowker as $bobotLowkers) {
+ $kriteria = kriteria::find($bobotLowkers->kriteria_id);
+ if ($kriteria->subKriterias->count() > 0) {
+ echo $kriteria->kriteria ,' = ';
+ foreach ($kriteria->subKriterias as $sub) {
+ echo $sub->sub_kriteria, ' ';
+ foreach ($sub->opsis as $opsiss) {
+ if ($opsi === $opsiss->opsi) {
+ echo ' cocok dengan = ', $opsiss->opsi;
+ echo ' nilai = ', $opsiss->nilai_opsi;
+ $nilaiAlternatif += ($opsiss->nilai_opsi * ($sub->nilai_sub_kriteria / 100));
+ }
+ // if ($opsi2 === $opsiss->opsi) {
+ // echo 'cocok dengan = ', $opsiss->opsi;
+ // echo ' nilai = ', $opsiss->nilai_opsi;
+ // $nilaiAlternatif += $opsiss->nilai_opsi;
+ // }
+ // if ($opsi3 === $opsiss->opsi) {
+ // echo 'cocok dengan = ', $opsiss->opsi;
+ // echo ' nilai = ', $opsiss->nilai_opsi;
+ // $nilaiAlternatif += $opsiss->nilai_opsi;
+ // }
+ }
+ }
+ echo $nilaiAlternatif;
+ // echo $bobotLowkers->kriterias->kriteria;
+ // foreach ($bobotLowkers->kriterias->subKriterias as $sub) {
+ // foreach ($sub->opsis as $opsiss) {
+ // if ($opsiss->sub_kriteria_id == $sub->id) {
+ // echo $bobotLowkers->kriterias->kriteria;
+ // echo $sub->sub_kriteria;
+ // echo $opsiss->opsi;
+ // }
+ // }
+ // }
+ }
+ // else {
+ // echo $kriteria->kriteria;
+ // }
+ }
