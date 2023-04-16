@@ -1,6 +1,11 @@
 @extends('layout')
 @section('content')
-<div class="container-fluid pt-14 p-10">
+<div class="container-fluid p-10">
+    @if(session('message'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">Success!</span> {{ session('message') }}
+        </div>
+    @endif
     <div class="relative  flex col-span-2 overflow-x-auto shadow-md mt-5 sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

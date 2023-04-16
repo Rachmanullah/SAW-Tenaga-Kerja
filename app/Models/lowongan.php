@@ -24,4 +24,8 @@ class lowongan extends Model
     {
         return $this->belongsTo(bobotLowker::class, 'id');
     }
+    public function pendaftarans()
+    {
+        return $this->hasMany(pendaftaran::class);
+    }
 }

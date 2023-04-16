@@ -12,7 +12,7 @@
 </head>
 <body>
     {{-- navbar --}}
-    <nav class="navbar left-0 right-0 top-0 bg-slate-800 shadow h-12 items-end">
+    <nav class="navbar left-0 fixed right-0 top-0 bg-slate-800 shadow h-12 items-end">
         <div class="grid grid-cols-3 gap-4 ">
             <div class="pr-5 place-self-start">
                 <img class="block ml-5 h-12 w-auto" src="http://127.0.0.1:8000/assets/image/logoArkit2.png" alt="Your Company">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </nav>
-    <div class="pt-0">
+    <div class="pt-12">
         @yield('content')
     </div>
     <script src="http://127.0.0.1:8000/assets/fontawesome/js/fontawesome.min.js"></script>
