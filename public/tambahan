@@ -32,6 +32,8 @@
  @endforeach
  @endforeach
 
+
+ 
  //$lowongan = lowongan::find($id);
  $bobotLowker = bobotLowker::where('lowongan_id', $id)->get();
  $opsi = "S1";

@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('tgl_dimulai');
             $table->date('tgl_ditutup');
+            $table->string('lowongan_kerja');
             $table->integer('kuota');
-            $table->enum('status',['Buka','Tutup','Penuh']);
+            $table->enum('status', ['Buka', 'Tutup', 'Penuh']);
             $table->unsignedBigInteger('divisi_id');
             $table->foreign('divisi_id')->references('id')->on('divisis')->noActionOnDelete();
             $table->timestamps();

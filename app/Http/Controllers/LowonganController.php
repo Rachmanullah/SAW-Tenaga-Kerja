@@ -52,6 +52,7 @@ class LowonganController extends Controller
         $data = new lowongan([
             'tgl_dimulai' => $request->tgl_dimulai,
             'tgl_ditutup' => $request->tgl_ditutup,
+            'lowongan_kerja' => $request->lowongan_kerja,
             'kuota' => $request->kuota,
             'divisi_id' => $request->divisi_id,
             'status' => $request->status,
@@ -104,6 +105,7 @@ class LowonganController extends Controller
         lowongan::find($request->id)->update([
             'tgl_dimulai' => $request->tgl_dimulai,
             'tgl_ditutup' => $request->tgl_ditutup,
+            'lowongan_kerja' => $request->lowongan_kerja,
             'kuota' => $request->kuota,
             'divisi_id' => $request->divisi_id,
             'status' => $request->status,

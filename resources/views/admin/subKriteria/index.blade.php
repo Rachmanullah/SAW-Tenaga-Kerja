@@ -52,11 +52,13 @@
                         {{ $subKriterias->nilai_sub_kriteria }}%
                     </td>
                     <td class="px-6 py-4">
-                        @foreach($opsi as $opsis)
-                        @if($opsis->sub_kriteria_id === $subKriterias->id)
+                        @if($subKriterias->opsis->count() > 0)
+                        @foreach($subKriterias->opsis as $opsis)
                         {{ $opsis->opsi }} [{{ $opsis->nilai_opsi }}]
-                        @endif
                         @endforeach
+                        @else
+                        <a href="#" class="font-medium text-slate-100 hover:underline" type="button" data-modal-target="addOpsi-modal{{ $subKriterias->id }}" data-modal-toggle="addOpsi-modal{{ $subKriterias->id }}">Buat Opsi</a>
+                        @endif
                     </td>
                     <td class="px-6 py-4x space-x-3">
                         <a href="#" class="font-medium hover:underline" type="button" data-modal-target="addOpsi-modal{{ $subKriterias->id }}" data-modal-toggle="addOpsi-modal{{ $subKriterias->id }}"><i class="fa-solid fa-pen fa-beat" style="color: #ffffff;"></i></a>
@@ -86,7 +88,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="add-more bg-blue-600 mt-5 transition ease-in-out delay-15 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-white font-TitilliumWeb-Bold py-2 px-2 rounded w-50">
-                                                Add Sub
+                                                Add Opsi
                                             </button>
                                             <button type="submit" class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
                                         </form>
@@ -115,7 +117,6 @@
         <div>
             <label for="nilai_opsi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nilai Opsi</label>
             <input type="number" name="nilai_opsi[]" id="nilai_opsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nilai Opsi" autocomplete="off">
-
         </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -128,6 +129,5 @@
         });
 
     </script>
-
 </div>
 @endsection

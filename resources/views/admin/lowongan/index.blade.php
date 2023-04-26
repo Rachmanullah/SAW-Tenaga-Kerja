@@ -26,6 +26,9 @@
                         Tanggal Ditutup
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Lowker
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Kuota
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -56,6 +59,9 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $lowker->tgl_ditutup }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $lowker->lowongan_kerja }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lowker->kuota }}
@@ -100,6 +106,10 @@
                                     <div>
                                         <label for="tgl_ditutup" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Ditutup</label>
                                         <input type="date" name="tgl_ditutup" id="tgl_ditutup" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $lowker->tgl_ditutup }}" required autocomplete="off">
+                                    </div>
+                                    <div>
+                                        <label for="lowongan_kerja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lowongan Kerja</label>
+                                        <input type="text" name="lowongan_kerja" id="lowongan_kerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $lowker->lowongan_kerja }}" required autocomplete="off">
                                     </div>
                                     <div>
                                         <label for="kuota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kuota</label>
@@ -177,6 +187,10 @@
                         <div>
                             <label for="tgl_ditutup" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ditutup</label>
                             <input type="date" name="tgl_ditutup" id="tgl_ditutup" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
+                        </div>
+                        <div>
+                            <label for="lowongan_kerja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lowongan Kerja</label>
+                            <input type="text" name="lowongan_kerja" id="lowongan_kerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
                         </div>
                         <div>
                             <label for="kuota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kuota</label>

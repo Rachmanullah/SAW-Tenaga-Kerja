@@ -12,6 +12,7 @@ class lowongan extends Model
     protected $fillable = [
         'tgl_dimulai',
         'tgl_ditutup',
+        'lowongan_kerja',
         'kuota',
         'status',
         'divisi_id'

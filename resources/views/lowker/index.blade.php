@@ -14,6 +14,9 @@
                         No
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Lowker
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Divisi
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -43,6 +46,9 @@
                         {{ $no++ }}
                     </td>
                     <td class="px-6 py-4">
+                        {{ $lowongans->lowongan_kerja }}
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $lowongans->divisis->divisi }}
                     </td>
                     <td class="px-6 py-4">
@@ -67,7 +73,11 @@
                     </td>
                     <td class="px-6 py-4x space-x-3">
                         {{-- <a href="#" class="font-medium hover:underline" type="button" data-modal-target="updateKriteria-modal{{ $lowongans->id }}" data-modal-toggle="updateKriteria-modal{{ $lowongans->id }}"><i class="fa-solid fa-pen fa-beat" style="color: #ffffff;"></i></a> --}}
+                        @if($lowongans->kuota === 0)
+                        <a class="font-medium">Kuota Habis</a>
+                        @else
                         <a href="{{ route('daftar', ['id' => $lowongans->id ]) }}" class="font-medium hover:underline"> Daftar</a>
+                        @endif
                     </td>
                 </tr>
                 @empty($lowongans)

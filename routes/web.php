@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubKriteriaController;
 use App\Http\Controllers\UserController;
@@ -29,22 +30,22 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-
+//route about
 Route::get('/about', function () {
-    return view('index');
+    return view('admin.layout');
 })->name('about');
 
+//route lowongan
 Route::get('/lowongan', [LowonganController::class, 'tampilkan'])->name('lowongan');
 
-route::get('/dashboard', [DashboardController::class, 'adminDashboard']);
-
+//route daftar lowongan
 route::controller(DaftarController::class)->group(function () {
     route::get('/daftar/{id}', 'daftar')->name('daftar');
     route::post('/daftar/store', 'store')->name('daftar.store');
 });
 
 
-//route login admin
+//route halaman login admin
 route::get('/admin/login', function () {
     if (Auth::check()) {
         return redirect('/admin/home');
@@ -52,9 +53,11 @@ route::get('/admin/login', function () {
     return view('login');
 })->name('login');
 
+//login
 route::post('/login', [AuthController::class, 'login'])->name('login.check');
 
 route::middleware([is_Auth::class])->group(function () {
+    //logout
     route::get('/admin/logout/{id}', [AuthController::class, 'logout'])->name('logout');
     //route admin
     route::get('/admin/home', [DashboardController::class, 'adminDashboard'])->name('dashboard');
@@ -81,16 +84,22 @@ route::middleware([is_Auth::class])->group(function () {
         route::put('/admin/role/update', 'update')->name('role.update');
     });
 
-    route::get('/admin/pelamar', function () {
-        return view('admin.pelamar.index');
-    })->name('data.pelamar');
+    //route data pelamar
+    Route::controller(PelamarController::class)->group(function () {
+        route::get('/admin/pelamar', 'index')->name('data.pelamar');
+    });
 
+    //route data lowongan
     route::controller(LowonganController::class)->group(function () {
         route::get('/admin/lowongan', 'index')->name('data.lowongan');
         route::post('/admin/lowongan/store', 'store')->name('lowongan.store');
         route::put('/admin/lowongan/update', 'update')->name('lowongan.update');
         route::get('/admin/lowongan/delete/{id}', 'destroy')->name('lowongan.delete');
     });
+
+    //route data penilaian
+
+    //route data kriteria
     route::controller(KriteriaController::class)->group(function () {
         route::get('/admin/kriteria', 'index')->name('data.kriteria');
         route::post('/admin/kriteria/store', 'store')->name('kriteria.store');
@@ -98,6 +107,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/kriteria/delete/{id}', 'destroy')->name('kriteria.delete');
     });
 
+    //route data sub kriteria
     route::controller(SubKriteriaController::class)->group(function () {
         route::get('/admin/subKriteria', 'index')->name('data.subKriteria');
         route::post('admin/subKriteria/addOpsi', 'addOpsi')->name('subkriteria.storeOpsi');

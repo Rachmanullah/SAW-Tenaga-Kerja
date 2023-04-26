@@ -25,4 +25,8 @@ class pelamar extends Model
     public function pendaftarans(){
         return $this->hasOne(pendaftaran::class);
     }
+
+    public function penilaians(){
+        return $this->hasMany(penilaianAlternatif::class);
+    }
 }
