@@ -13,7 +13,7 @@
                         <p class="font-TitilliumWeb-BoldItalic text-3xl">{{ $countPelamar }}</p>
                     </div>
                     <div class="col-rows-2 grid justify-end">
-                        <i class="fa-solid fa-user-plus relative text-center text-7xl "></i>
+                        <i class="fa-solid fa-user-plus  text-center text-7xl "></i>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         <p class="font-TitilliumWeb-BoldItalic text-3xl">{{ $countLowongan }}</p>
                     </div>
                     <div class="col-rows-2 grid justify-end">
-                        <i class="fa-solid fa-user-plus relative text-center text-7xl "></i>
+                        <i class="fa-solid fa-user-plus  text-center text-7xl "></i>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <p class="font-TitilliumWeb-BoldItalic text-3xl">1</p>
                     </div>
                     <div class="col-rows-2 grid justify-end">
-                        <i class="fa-solid fa-user-plus relative text-center text-7xl "></i>
+                        <i class="fa-solid fa-user-plus  text-center text-7xl "></i>
                     </div>
                 </div>
             </div>

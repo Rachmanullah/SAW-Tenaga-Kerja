@@ -16,7 +16,7 @@ class bobotLowker extends Model
 
     public function lowongans()
     {
-        return $this->hasMany(lowongan::class, 'lowongan_id');
+        return $this->belongsTo(lowongan::class, 'lowongan_id');
     }
     public function kriterias()
     {

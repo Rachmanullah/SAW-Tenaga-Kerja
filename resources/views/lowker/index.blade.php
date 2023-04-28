@@ -75,6 +75,8 @@
                         {{-- <a href="#" class="font-medium hover:underline" type="button" data-modal-target="updateKriteria-modal{{ $lowongans->id }}" data-modal-toggle="updateKriteria-modal{{ $lowongans->id }}"><i class="fa-solid fa-pen fa-beat" style="color: #ffffff;"></i></a> --}}
                         @if($lowongans->kuota === 0)
                         <a class="font-medium">Kuota Habis</a>
+                        @elseif($lowongans->status == "Tutup")
+                        <a class="font-medium">Tutup</a>
                         @else
                         <a href="{{ route('daftar', ['id' => $lowongans->id ]) }}" class="font-medium hover:underline"> Daftar</a>
                         @endif

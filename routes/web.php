@@ -7,6 +7,7 @@ use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubKriteriaController;
 use App\Http\Controllers\UserController;
@@ -98,6 +99,10 @@ route::middleware([is_Auth::class])->group(function () {
     });
 
     //route data penilaian
+    route::controller(PenilaianController::class)->group(function(){
+        route::get('/admin/penilaian','index')->name('data.penilaian');
+        route::get('/admin/penilaian/{id}','view')->name('penilaian.view');
+    });
 
     //route data kriteria
     route::controller(KriteriaController::class)->group(function () {

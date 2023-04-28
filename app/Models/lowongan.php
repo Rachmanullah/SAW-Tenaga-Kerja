@@ -23,7 +23,7 @@ class lowongan extends Model
     }
     public function bobotLowker()
     {
-        return $this->belongsTo(bobotLowker::class, 'id');
+        return $this->hasMany(bobotLowker::class);
     }
     public function pendaftarans()
     {

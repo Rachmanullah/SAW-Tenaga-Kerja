@@ -54,7 +54,7 @@
                     <td class="px-6 py-4">
                         @if($subKriterias->opsis->count() > 0)
                         @foreach($subKriterias->opsis as $opsis)
-                        {{ $opsis->opsi }} [{{ $opsis->nilai_opsi }}]
+                        {{ $opsis->opsi }} [{{ $opsis->nilai_opsi }}] <br>
                         @endforeach
                         @else
                         <a href="#" class="font-medium text-slate-100 hover:underline" type="button" data-modal-target="addOpsi-modal{{ $subKriterias->id }}" data-modal-toggle="addOpsi-modal{{ $subKriterias->id }}">Buat Opsi</a>

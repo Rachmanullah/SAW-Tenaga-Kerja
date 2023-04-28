@@ -99,8 +99,8 @@
                 </li>
                 {{-- Data Penilaian --}}
                 <li
-                    class="h-10 w-full bg-slate-800 rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
-                    <a href="#" class="flex flex-row text-md ml-3">
+                    class="h-10 w-full {{ request()->routeIs('data.penilaian') ? 'bg-orange-500' : 'bg-slate-800' }} bg-slate-800 rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
+                    <a href="{{ route('data.penilaian') }}" class="flex flex-row text-md ml-3">
                         <i class="fa-solid fa-list-check fa-beat" style="color: #ffffff;"></i>
                         <h3 class="ml-5 text-sm">Data Penilaian</h3>
                     </a>
