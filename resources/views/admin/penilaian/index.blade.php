@@ -51,7 +51,7 @@
                     <td class="px-6 py-4">
                         @foreach($lowkers->bobotLowker as $bobotLowkers)
                         @if($bobotLowkers->lowongan_id == $lowkers->id)
-                        {{ $bobotLowkers->kriterias->kriteria }}
+                        {{ $bobotLowkers->kriterias->kriteria }}<br>
                         @endif
                         @endforeach
                     </td>

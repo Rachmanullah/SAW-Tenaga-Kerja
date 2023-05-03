@@ -55,9 +55,9 @@ class DaftarController extends Controller
         $pendaftaran->save();
 
         $bobotLowker = bobotLowker::where('lowongan_id', $request->lowongan_id)->get();
-        $nilai = 0;
         foreach ($bobotLowker as $bobotLowkers) {
             if ($bobotLowkers->kriterias->subKriterias->count() > 0) {
+                $nilai = 0;
                 foreach ($bobotLowkers->kriterias->subKriterias as $subKriterias) {
                     $nilai += ($subKriterias->nilai_sub_kriteria / 100) * $request->sub_kriteria[$subKriterias->id];
                 }
