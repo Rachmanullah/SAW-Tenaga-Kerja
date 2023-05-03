@@ -13,6 +13,7 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
@@ -23,7 +24,8 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->invalidate();
         return redirect('/admin/login');
     }

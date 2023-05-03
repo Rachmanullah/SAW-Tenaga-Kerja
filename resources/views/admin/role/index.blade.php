@@ -41,7 +41,7 @@
                     </td>
                     <td class="px-6 py-4x space-x-3">
                         <a href="#" class="font-medium hover:underline" type="button" data-modal-target="updateRole-modal{{ $roles->id }}" data-modal-toggle="updateRole-modal{{ $roles->id }}"><i class="fa-solid fa-pen fa-beat" style="color: #ffffff;"></i></a>
-                        <a href="{{ route('user.delete', ['id' => $roles->id ]) }}" class="font-medium hover:underline"><i class="fa-solid fa-trash fa-beat" style="color: #fcfcfd;"></i></a>
+                        <a href="{{ route('role.delete', ['id' => $roles->id ]) }}" class="font-medium hover:underline"><i class="fa-solid fa-trash fa-beat" style="color: #fcfcfd;"></i></a>
                     </td>
                 </tr>
                 {{-- Modal Update role --}}

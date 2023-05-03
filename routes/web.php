@@ -57,6 +57,7 @@ route::get('/admin/login', function () {
 //login
 route::post('/login', [AuthController::class, 'login'])->name('login.check');
 
+
 route::middleware([is_Auth::class])->group(function () {
     //logout
     route::get('/admin/logout/{id}', [AuthController::class, 'logout'])->name('logout');
@@ -83,11 +84,13 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/role', 'index')->name('data.role');
         route::post('/admin/role/store', 'store')->name('role.store');
         route::put('/admin/role/update', 'update')->name('role.update');
+        route::get('/admin/role/delete/{id}','destroy')->name('role.delete');
     });
 
     //route data pelamar
     Route::controller(PelamarController::class)->group(function () {
         route::get('/admin/pelamar', 'index')->name('data.pelamar');
+        route::post('/admin/pelamar/print', 'print')->name('pelamar.print');
     });
 
     //route data lowongan

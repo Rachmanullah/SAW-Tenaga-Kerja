@@ -74,9 +74,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        role::find($request->id)->update(['role' => $request->role]);
+
+        return redirect()->route('data.role')->with('message', 'Berhasil Update');
     }
 
     /**
@@ -87,6 +89,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        role::find($id)->delete();
+        return redirect()->route('data.role')->with('message', 'Berhasil Dihapus');
     }
 }

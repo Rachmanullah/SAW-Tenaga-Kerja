@@ -5,7 +5,7 @@
         <form Action="{{ route('daftar.store') }}" method="post">
             @csrf
             <input type="text" name="lowongan_id" value="{{ $lowongan_id }}" hidden />
-            <h3>Biodata</h3>
+            <h3 class="text-sm text-white">Biodata</h3>
             <div class="grid md:grid-cols-2 md:gap-5">
                 <div class="relative z-0 w-full mb-2 group">
                     <input type="text" name="nama" id="nama" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required autocomplete="off" />
@@ -64,19 +64,19 @@
                 </div>
             </div>
                 @foreach($bobotLowker as $bobotLowkers)
-                    <h3>Input Penilaian {{ $bobotLowkers->kriterias->kriteria }}</h3>
+                    <h3 class="text-sm text-white">Input Penilaian {{ $bobotLowkers->kriterias->kriteria }}</h3>
                     <div class="grid md:grid-cols-2 md:gap-5">
                         @if($bobotLowkers->kriterias->subKriterias->count() > 0)
                             @foreach($subKriteria as $subKriterias)
                                 @if($subKriterias->kriteria_id == $bobotLowkers->kriterias->id)
                                     <div class="relative z-0 w-full mb-1 group">
-                                        <label id="{{ $subKriterias->sub_kriteria }}">{{ $subKriterias->sub_kriteria }}</label>
+                                        <label class="text-sm text-gray-500 dark:text-gray-400" id="{{ $subKriterias->sub_kriteria }}">{{ $subKriterias->sub_kriteria }}</label>
                                         <select id="sub_kriteria-{{ $subKriterias->id }}" required name="sub_kriteria[{{ $subKriterias->id }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled>{{ $subKriterias->sub_kriteria }}</option>
-                                            @foreach($opsi as $opsis)  
-                                                @if($opsis->sub_kriteria_id == $subKriterias->id)                                                
+                                            @foreach($opsi as $opsis)
+                                                @if($opsis->sub_kriteria_id == $subKriterias->id)
                                                     <option value="{{ $opsis->nilai_opsi }}">{{ $opsis->opsi }}[{{ $opsis->nilai_opsi }}]</option>
-                                                @endif  
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>

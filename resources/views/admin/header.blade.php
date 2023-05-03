@@ -34,6 +34,7 @@
             </a>
             <ul class="space-y-2 font-medium">
                 {{-- Home --}}
+                {{-- @if(auth()->user()->role_id === 1) --}}
                 <li
                     class="h-10 w-full  rounded-md flex items-center my-2 {{ request()->routeIs('dashboard') ? 'bg-orange-500' : 'bg-slate-800' }} text-slate-300 cursor-pointer hover:bg-gray-700">
                     <a href="{{ route('dashboard') }}" class="flex flex-row text-md ml-3">
@@ -41,6 +42,7 @@
                         <h3 class="ml-4 text-sm">Home</h3>
                     </a>
                 </li>
+                {{-- @elseif(auth()->user()->role_id === 2) --}}
                 {{-- Data User --}}
                 <li
                     class="h-10 w-full {{ request()->routeIs('data.user') ? 'bg-orange-500' : 'bg-slate-800' }} rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
@@ -49,6 +51,7 @@
                         <h3 class="ml-5 text-sm">Data User</h3>
                     </a>
                 </li>
+                {{-- @endif --}}
                 {{-- Data Role --}}
                 <li
                     class="h-10 w-full {{ request()->routeIs('data.role') ? 'bg-orange-500' : 'bg-slate-800' }} rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
@@ -99,7 +102,7 @@
                 </li>
                 {{-- Data Penilaian --}}
                 <li
-                    class="h-10 w-full {{ request()->routeIs('data.penilaian') ? 'bg-orange-500' : 'bg-slate-800' }} bg-slate-800 rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
+                    class="h-10 w-full {{ request()->routeIs('data.penilaian') ? 'bg-orange-500' : 'bg-slate-800' }} rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
                     <a href="{{ route('data.penilaian') }}" class="flex flex-row text-md ml-3">
                         <i class="fa-solid fa-list-check fa-beat" style="color: #ffffff;"></i>
                         <h3 class="ml-5 text-sm">Data Penilaian</h3>

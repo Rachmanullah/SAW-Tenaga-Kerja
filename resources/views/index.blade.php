@@ -14,7 +14,6 @@
         </div>
         <div class="md-col-start-2">
             <img class="rounded-xl skew-y-6 shadow-lg shadow-black" src="{{url('/assets/image/building.jpg')}}" alt="Image" />
-
         </div>
     </div>
 
