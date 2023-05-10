@@ -24,6 +24,7 @@ class KriteriaController extends Controller
         $kriteria = new kriteria([
             'kriteria' => $request->kriteria,
             'bobot' => $request->bobot,
+            'kategori' => $request->kategori,
         ]);
         $kriteria->save();
 
@@ -46,6 +47,7 @@ class KriteriaController extends Controller
         kriteria::find($request->id)->update([
             'kriteria' => $request->kriteria,
             'bobot' => $request->bobot,
+            'kategori' => $request->kategori,
         ]);
 
         if ($request->id_sub_kriterias) {

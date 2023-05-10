@@ -110,8 +110,8 @@
                 </li>
                 {{-- Data Hasil SAW --}}
                 <li
-                    class="h-10 w-full bg-slate-800 rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
-                    <a href="#" class="flex flex-row text-md ml-3">
+                    class="h-10 w-full {{ request()->routeIs('data.saw') ? 'bg-orange-500' : 'bg-slate-800' }} rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
+                    <a href="{{ route('data.saw') }}" class="flex flex-row text-md ml-3">
                         <i class="fa-solid fa-chart-simple fa-beat" style="color: #ffffff;"></i>
                         <h3 class="ml-5 text-sm">Data Hasil SAW</h3>
                     </a>

@@ -56,26 +56,34 @@ class DaftarController extends Controller
 
         $bobotLowker = bobotLowker::where('lowongan_id', $request->lowongan_id)->get();
         foreach ($bobotLowker as $bobotLowkers) {
-            if ($bobotLowkers->kriterias->subKriterias->count() > 0) {
-                $nilai = 0;
-                foreach ($bobotLowkers->kriterias->subKriterias as $subKriterias) {
-                    $nilai += ($subKriterias->nilai_sub_kriteria / 100) * $request->sub_kriteria[$subKriterias->id];
-                }
-                $penilaian = new penilaianAlternatif([
-                    'pelamar_id' => $pelamar->id,
-                    'kriteria_id' => $bobotLowkers->kriterias->id,
-                    'nilai' => $nilai,
-                ]);
-                $penilaian->save();
-            } else {
-                $penilaian = new penilaianAlternatif([
-                    'pelamar_id' => $pelamar->id,
-                    'kriteria_id' => $bobotLowkers->kriterias->id,
-                    'nilai' => $request->data[str_replace(' ', '_', $bobotLowkers->kriterias->kriteria)],
-                ]);
-                $penilaian->save();
-            }
+            // if ($bobotLowkers->kriterias->subKriterias->count() > 0) {
+            //     $nilai = 0;
+            //     foreach ($bobotLowkers->kriterias->subKriterias as $subKriterias) {
+            //         $nilai += ($subKriterias->nilai_sub_kriteria / 100) * $request->sub_kriteria[$subKriterias->id];
+            //     }
+            //     $penilaian = new penilaianAlternatif([
+            //         'pelamar_id' => $pelamar->id,
+            //         'kriteria_id' => $bobotLowkers->kriterias->id,
+            //         'nilai' => $nilai,
+            //     ]);
+            //     $penilaian->save();
+            // } else {
+            // $penilaian = new penilaianAlternatif([
+            //     'pelamar_id' => $pelamar->id,
+            //     'kriteria_id' => $bobotLowkers->kriterias->id,
+            //     'nilai' => $request->data[str_replace(' ', '_', $bobotLowkers->kriterias->kriteria)],
+            // ]);
+            // $penilaian->save();
+            // }
+            $penilaian = new penilaianAlternatif([
+                'pelamar_id' => $pelamar->id,
+                'lowongan_id' => $request->lowongan_id,
+                'kriteria_id' => $bobotLowkers->kriterias->id,
+                'nilai' => 0,
+            ]);
+            $penilaian->save();
         }
+
         $jmlkuota = lowongan::find($request->lowongan_id);
         $jmlkuota->kuota = $jmlkuota->kuota - 1;
         $jmlkuota->save();

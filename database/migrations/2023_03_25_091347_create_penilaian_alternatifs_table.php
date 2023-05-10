@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pelamar_id');
             $table->foreign('pelamar_id')->references('id')->on('pelamars')->noActionOnDelete();
+            $table->unsignedBigInteger('lowongan_id');
+            $table->foreign('lowongan_id')->references('id')->on('lowongans')->noActionOnDelete();
             $table->unsignedBigInteger('kriteria_id');
             $table->foreign('kriteria_id')->references('id')->on('kriterias')->noActionOnDelete();
             $table->float('nilai');

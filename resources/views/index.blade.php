@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<div class="container-fluid max-w-full bg-gray-300">
+<div class="container-fluid max-w-full bg-gray-300 h-screen">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:px-8 pt-16 pb-36">
         <div class="flex flex-col justify-center mr-10">
             <h2 class="font-Kanit-Black text-5xl mb-8">

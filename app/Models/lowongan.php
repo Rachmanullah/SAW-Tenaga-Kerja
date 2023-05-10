@@ -25,6 +25,10 @@ class lowongan extends Model
     {
         return $this->hasMany(bobotLowker::class);
     }
+    public function penilaians()
+    {
+        return $this->hasMany(penilaianAlternatif::class);
+    }
     public function pendaftarans()
     {
         return $this->hasMany(pendaftaran::class);

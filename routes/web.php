@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\HasilController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\PelamarController;
@@ -84,7 +85,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/role', 'index')->name('data.role');
         route::post('/admin/role/store', 'store')->name('role.store');
         route::put('/admin/role/update', 'update')->name('role.update');
-        route::get('/admin/role/delete/{id}','destroy')->name('role.delete');
+        route::get('/admin/role/delete/{id}', 'destroy')->name('role.delete');
     });
 
     //route data pelamar
@@ -101,12 +102,6 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/lowongan/delete/{id}', 'destroy')->name('lowongan.delete');
     });
 
-    //route data penilaian
-    route::controller(PenilaianController::class)->group(function(){
-        route::get('/admin/penilaian','index')->name('data.penilaian');
-        route::get('/admin/penilaian/{id}','view')->name('penilaian.view');
-    });
-
     //route data kriteria
     route::controller(KriteriaController::class)->group(function () {
         route::get('/admin/kriteria', 'index')->name('data.kriteria');
@@ -121,4 +116,19 @@ route::middleware([is_Auth::class])->group(function () {
         route::post('admin/subKriteria/addOpsi', 'addOpsi')->name('subkriteria.storeOpsi');
         route::get('/admin/subKriteria/delete/{id}', 'destroy')->name('subKriteria.delete');
     });
+
+    //route data penilaian
+    route::controller(PenilaianController::class)->group(function () {
+        route::get('/admin/penilaian', 'index')->name('data.penilaian');
+        route::get('/admin/penilaian/{id}', 'view')->name('penilaian.view');
+        route::put('/admin/penilaian', 'inputNilai')->name('penilaian.input');
+    });
+
+    //route hasil saw
+    route::controller(HasilController::class)->group(function () {
+        route::get('/admin/SAW', 'index')->name('data.saw');
+        route::get('/admin/SAW/{id}', 'view')->name('saw.view');
+    });
 });
+
+route::get('/test', [PenilaianController::class, 'test']);
