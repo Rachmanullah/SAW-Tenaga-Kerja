@@ -52,16 +52,12 @@
                         {{ $subKriterias->nilai_sub_kriteria }}%
                     </td>
                     <td class="px-6 py-4">
-                        @if($subKriterias->opsis->count() > 0)
                         @foreach($subKriterias->opsis as $opsis)
-                        {{ $opsis->opsi }} [{{ $opsis->nilai_opsi }}] <br>
+                        {{ $opsis->opsi }} [{{ $opsis->nilai_opsi }}] <a href="{{ route('opsi.destroy',['id'=> $opsis->id]) }}" class="font-medium hover:underline" type="button" ><i class="fa-solid fa-minus fa-beat"style="color: #f7f7f7;"></i></a> <br>
                         @endforeach
-                        @else
-                        <a href="#" class="font-medium text-slate-100 hover:underline" type="button" data-modal-target="addOpsi-modal{{ $subKriterias->id }}" data-modal-toggle="addOpsi-modal{{ $subKriterias->id }}">Buat Opsi</a>
-                        @endif
+                        <a href="#" class="font-medium hover:underline" type="button" data-modal-target="addOpsi-modal{{ $subKriterias->id }}" data-modal-toggle="addOpsi-modal{{ $subKriterias->id }}"><i class="fa-solid fa-plus fa-beat" style="color: #fafafa;"></i></a>
                     </td>
                     <td class="px-6 py-4x space-x-3">
-                        <a href="#" class="font-medium hover:underline" type="button" data-modal-target="addOpsi-modal{{ $subKriterias->id }}" data-modal-toggle="addOpsi-modal{{ $subKriterias->id }}"><i class="fa-solid fa-pen fa-beat" style="color: #ffffff;"></i></a>
                         <a href="{{ route('subKriteria.delete', ['id' => $subKriterias->id ]) }}" class="font-medium hover:underline"><i class="fa-solid fa-trash fa-beat" style="color: #fcfcfd;"></i></a>
                         {{-- modal opsi --}}
                         <div id="addOpsi-modal{{ $subKriterias->id }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
@@ -74,7 +70,7 @@
                                     </button>
                                     <div class="px-6 py-6 lg:px-8">
                                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add Opsi {{ $subKriterias->sub_kriteria }}</h3>
-                                        <form class="space-y-1" action="{{ route('subkriteria.storeOpsi') }}" method="post">
+                                        <form class="space-y-1" action="{{ route('opsi.store') }}" method="post">
                                             @csrf
                                             <input class="form-control" type="text" name="id" value="{{ $subKriterias->id }}" readonly hidden>
                                             <div class="add_opsi">

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="text-3xl">
-        <h1 class="font-Kanit-Black"><i class="fa-solid fa-list-check fa-beat"></i> Data Penilaian</h1>
+        <h1 class="font-Kanit-Black"><i class="fa-solid fa-list-check fa-beat"></i> Data SAW</h1>
     </div>
     @if(session('message'))
     <div class="p-4 mt-3 mb-3 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">

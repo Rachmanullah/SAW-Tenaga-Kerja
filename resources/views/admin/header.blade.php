@@ -100,22 +100,22 @@
                         <h3 class="ml-4 text-sm">Data Sub Kriteria</h3>
                     </a>
                 </li>
-                {{-- Data Penilaian --}}
+                {{-- Data SAW --}}
                 <li
                     class="h-10 w-full {{ request()->routeIs('data.penilaian') ? 'bg-orange-500' : 'bg-slate-800' }} rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
                     <a href="{{ route('data.penilaian') }}" class="flex flex-row text-md ml-3">
-                        <i class="fa-solid fa-list-check fa-beat" style="color: #ffffff;"></i>
-                        <h3 class="ml-5 text-sm">Data Penilaian</h3>
+                        <i class="fa-solid fa-chart-simple fa-beat" style="color: #ffffff;"></i>
+                        <h3 class="ml-5 text-sm">Data SAW</h3>
                     </a>
                 </li>
                 {{-- Data Hasil SAW --}}
-                <li
+                {{-- <li
                     class="h-10 w-full {{ request()->routeIs('data.saw') ? 'bg-orange-500' : 'bg-slate-800' }} rounded-md flex items-center my-2 text-slate-300 cursor-pointer hover:bg-gray-700">
                     <a href="{{ route('data.saw') }}" class="flex flex-row text-md ml-3">
                         <i class="fa-solid fa-chart-simple fa-beat" style="color: #ffffff;"></i>
                         <h3 class="ml-5 text-sm">Data Hasil SAW</h3>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </aside>
@@ -136,8 +136,7 @@
                             </path>
                         </svg></button>
                     <!-- Dropdown menu -->
-                    <div id="dropdown"
-                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownDefaultButton">
                             <li>

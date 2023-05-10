@@ -7,6 +7,7 @@ use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\HasilController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\OpsiController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\RoleController;
@@ -117,6 +118,11 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/subKriteria/delete/{id}', 'destroy')->name('subKriteria.delete');
     });
 
+    //route data opsi
+    route::controller(OpsiController::class)->group(function () {
+        route::post('/admin/addOpsi', 'store')->name('opsi.store');
+        route::get('/admin/Opsi/Destory.{id}', 'destroy')->name('opsi.destroy');
+    });
     //route data penilaian
     route::controller(PenilaianController::class)->group(function () {
         route::get('/admin/penilaian', 'index')->name('data.penilaian');

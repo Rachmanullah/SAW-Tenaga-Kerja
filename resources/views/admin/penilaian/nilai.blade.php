@@ -2,13 +2,16 @@
 @section('content')
 <div class="container">
     <div class="text-3xl">
-        <h1 class="font-Kanit-Black"><i class="fa-solid fa-list-check"></i> Data Penilaian {{ $lowker->lowongan_kerja }}</h1>
+        <h1 class="font-Kanit-Black">Data SAW {{ $lowker->lowongan_kerja }}</h1>
     </div>
     @if(session('message'))
     <div class="p-4 mt-3 mb-3 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Success alert!</span> {{ session('message') }}
     </div>
     @endif
+    <div class="text-2xl">
+        <h1 class="font-Kanit-Black">Tabel Penilaian</h1>
+    </div>
     <div class="overflow-x-auto shadow-md mt-5 sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -124,8 +127,8 @@
             </tbody>
         </table>
     </div>
-    <div class="text-3xl mt-3">
-        <h1 class="font-Kanit-Black">Data Normalisasi</h1>
+    <div class="text-2xl mt-3">
+        <h1 class="font-Kanit-Black">Tabel Normalisasi</h1>
     </div>
     <div class="overflow-x-auto shadow-md mt-5 sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -175,8 +178,8 @@
             </tbody>
         </table>
     </div>
-    <div class="text-3xl mt-3">
-        <h1 class="font-Kanit-Black">Perhitungan</h1>
+    <div class="text-2xl mt-3">
+        <h1 class="font-Kanit-Black">Tabel Perhitungan</h1>
     </div>
     <div class="overflow-x-auto shadow-md mt-5 sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
