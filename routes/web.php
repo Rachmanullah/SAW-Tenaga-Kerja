@@ -61,6 +61,14 @@ route::post('/login', [AuthController::class, 'login'])->name('login.check');
 
 
 route::middleware([is_Auth::class])->group(function () {
+    //settings
+    route::get('/admin/akun', function () {
+        return view('admin.akun');
+    })->name('akun');
+    //route edit akun
+    Route::post('/admin/update/', [AuthController::class, 'update'])->name('update.profile');
+    //change Profile
+    route::get('/admin/changeProfile/{id}', [AuthController::class, 'ChangeProfile'])->name('change.profile');
     //logout
     route::get('/admin/logout/{id}', [AuthController::class, 'logout'])->name('logout');
     //route admin

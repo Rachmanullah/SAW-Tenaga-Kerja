@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->noActionOnDelete();
+            $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
