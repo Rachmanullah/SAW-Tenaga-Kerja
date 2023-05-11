@@ -93,6 +93,7 @@ route::middleware([is_Auth::class])->group(function () {
     Route::controller(PelamarController::class)->group(function () {
         route::get('/admin/pelamar', 'index')->name('data.pelamar');
         route::post('/admin/pelamar/print', 'print')->name('pelamar.print');
+        route::get('/admin/pelamar/destroy/{id}', 'destroy')->name('pelamar.destroy');
     });
 
     //route data lowongan

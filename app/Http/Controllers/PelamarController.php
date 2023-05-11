@@ -29,7 +29,7 @@ class PelamarController extends Controller
             $divisi = $key->lowongans->divisis->divisi;
             $lowker = $key->lowongans->lowongan_kerja;
         }
-        // dd($divisi);
+
         $data = [
             'divisi' => $divisi,
             'date' => date("d-M-Y"),
@@ -38,5 +38,12 @@ class PelamarController extends Controller
         ];
         $pdf = Pdf::loadView('admin.pelamar.print', $data);
         return $pdf->download('pelamar.pdf');
+    }
+
+    public function destroy($id)
+    {
+        pelamar::find($id)->delete();
+        
+        return redirect()->route('data.pelamar')->with('message', 'Berhasil Dihapus');
     }
 }

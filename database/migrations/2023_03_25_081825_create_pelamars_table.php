@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('no_telp');
             $table->string('email');
             $table->enum('agama', ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha']);
-            $table->enum('pendidikan_akhir', ['SMA', 'SMK', 'S1', 'S2', 'Lain']);
+            // $table->enum('pendidikan_akhir', ['SMA', 'SMK', 'S1', 'S2', 'Lain']);
+            $table->string('cv');
             $table->timestamps();
         });
     }
