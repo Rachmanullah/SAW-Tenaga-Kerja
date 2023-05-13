@@ -12,6 +12,7 @@ use App\Models\penilaianAlternatif;
 use App\Models\subKriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\File;
 
 class DaftarController extends Controller
 {
@@ -34,6 +35,15 @@ class DaftarController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'cv' => 'mimes:pdf|max:2048'
+        ]);
+        if ($request->file('cv')) {
+            $cv = time() . '-' . $request->file('cv')->getClientOriginalName();
+            $request->file('cv')->move('assets/file', $cv);
+        } else {
+            $cv = '';
+        }
         $pelamar = new pelamar([
             'name' => $request->nama,
             'email' => $request->email,
@@ -43,8 +53,9 @@ class DaftarController extends Controller
             'umur' => $request->umur,
             'jenis_kelamin' => $request->jk,
             'agama' => $request->agama,
-            'pendidikan_akhir' => $request->pendidikan_akhir,
+            // 'pendidikan_akhir' => $request->pendidikan_akhir,
             'alamat' => $request->alamat,
+            'cv' => $cv
         ]);
         $pelamar->save();
 

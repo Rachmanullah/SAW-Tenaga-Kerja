@@ -9,7 +9,7 @@ class pelamar extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'tmp_lahir',
         'tgl_lahir',
@@ -17,16 +17,19 @@ class pelamar extends Model
         'umur',
         'agama',
         'alamat',
-        'pendidikan_terakhir',
+        // 'pendidikan_terakhir',
         'email',
         'no_telp',
+        'cv'
     ];
 
-    public function pendaftarans(){
+    public function pendaftarans()
+    {
         return $this->hasOne(pendaftaran::class);
     }
 
-    public function penilaians(){
+    public function penilaians()
+    {
         return $this->hasMany(penilaianAlternatif::class);
     }
 }
