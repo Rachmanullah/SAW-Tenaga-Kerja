@@ -29,23 +29,40 @@ class PenilaianController extends Controller
         $subKriteria = subKriteria::all();
         $opsi = Opsi::all();
         $nilai = penilaianAlternatif::where('lowongan_id', $id)->get();
+        $dataSAW = [];
         foreach ($nilai as $nilais) {
-            foreach ($nilais->normalisasi($id) as $dt) {
-                $dataSAW[] = $dt;
-            }
-        }
-        foreach ($pendaftaran as $pendaftar) {
-            $akhir = 0;
-            foreach ($dataSAW as $key) {
-                if ($key['id'] == $pendaftar->pelamar_id) {
-                    $akhir += $key['hasil_saw'];
+            if ($nilais) {
+                foreach ($nilais->normalisasi($id) as $dt) {
+                    $dataSAW[] = $dt;
                 }
             }
-            hasilSaw::updateOrCreate(
-                ['pelamar_id' => $pendaftar->pelamar_id],
-                ['hasil' => $akhir]
-            );
-            // var_dump($akhir);
+            // else{
+            //     $dataSAW[] =
+            //     [
+            //         'id' => '',
+            //         'name' => '',
+            //         'nilai_alternatif' => '',
+            //         'kriteria_id' => '',
+            //         'nilai_max' => '',
+            //         'bobot_kriteria' => '',
+            //         'hasil_normalisasi' => 0,
+            //         'hasil_saw' => 0
+            //     ];
+            // }
+        }
+        if ($dataSAW) {
+            foreach ($pendaftaran as $pendaftar) {
+                $akhir = 0;
+                foreach ($dataSAW as $key) {
+                    if ($key['id'] == $pendaftar->pelamar_id) {
+                        $akhir += $key['hasil_saw'];
+                    }
+                }
+                hasilSaw::updateOrCreate(
+                    ['pelamar_id' => $pendaftar->pelamar_id],
+                    ['hasil' => $akhir]
+                );
+            }
         }
         $array = [
             'lowker' => $lowker,

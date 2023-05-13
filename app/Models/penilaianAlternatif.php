@@ -38,17 +38,29 @@ class penilaianAlternatif extends Model
                 $max = penilaianAlternatif::where('kriteria_id', $this->kriteria_id)
                     ->where('lowongan_id', $id)
                     ->max('nilai');
-
-                $data[] = [
-                    'id' => $this->pelamar_id,
-                    'name' => $this->pelamars->name,
-                    'nilai_alternatif' => $this->nilai,
-                    'kriteria_id' => $this->kriteria_id,
-                    'nilai_max' => $max,
-                    'bobot_kriteria' => $this->kriterias->bobot,
-                    'hasil_normalisasi' => round($this->nilai / $max, 2),
-                    'hasil_saw' => $this->kriterias->bobot * round($this->nilai / $max, 2)
-                ];
+                if ($this->nilai) {
+                    $data[] = [
+                        'id' => $this->pelamar_id,
+                        'name' => $this->pelamars->name,
+                        'nilai_alternatif' => $this->nilai,
+                        'kriteria_id' => $this->kriteria_id,
+                        'nilai_max' => $max,
+                        'bobot_kriteria' => $this->kriterias->bobot,
+                        'hasil_normalisasi' => round($this->nilai / $max, 2),
+                        'hasil_saw' => $this->kriterias->bobot * round($this->nilai / $max, 2)
+                    ];
+                } else {
+                    $data[] = [
+                        'id' => $this->pelamar_id,
+                        'name' => $this->pelamars->name,
+                        'nilai_alternatif' => 0,
+                        'kriteria_id' => $this->kriteria_id,
+                        'nilai_max' => $max,
+                        'bobot_kriteria' => $this->kriterias->bobot,
+                        'hasil_normalisasi' => 0,
+                        'hasil_saw' => 0
+                    ];
+                }
             }
         }
         return $data;
