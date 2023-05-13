@@ -12,6 +12,7 @@ class kriteria extends Model
     protected $fillable = [
         'kriteria',
         'bobot',
+        'kategori'
     ];
 
     public function bobotLowker()

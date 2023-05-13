@@ -164,7 +164,7 @@
                                 <td class="px-6 py-4">
                                     {{ $datas['hasil_normalisasi'] }}
                                 </td>
-                            @endif
+                                @endif
                     @endforeach
                 </tr>
                     @empty($lowker)

@@ -36,19 +36,6 @@ class PenilaianController extends Controller
                     $dataSAW[] = $dt;
                 }
             }
-            // else{
-            //     $dataSAW[] =
-            //     [
-            //         'id' => '',
-            //         'name' => '',
-            //         'nilai_alternatif' => '',
-            //         'kriteria_id' => '',
-            //         'nilai_max' => '',
-            //         'bobot_kriteria' => '',
-            //         'hasil_normalisasi' => 0,
-            //         'hasil_saw' => 0
-            //     ];
-            // }
         }
         if ($dataSAW) {
             foreach ($pendaftaran as $pendaftar) {
@@ -72,7 +59,7 @@ class PenilaianController extends Controller
             'subKriteria' => $subKriteria,
             'opsi' => $opsi,
         ];
-        // dd(['dataSAW' => $dataSAW]);
+
         return view('admin.penilaian.nilai', $array, ['dataSAW' => $dataSAW]);
     }
     public function inputNilai(Request $request)
