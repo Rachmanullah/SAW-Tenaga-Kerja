@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\role;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -107,5 +108,16 @@ class UserController extends Controller
         $user = User::find($id)->delete();
 
         return redirect()->route('data.user')->with('message', 'Data Berhasil Dihapus');
+    }
+
+    public function print()
+    {
+        $user = User::all();
+        $data = [
+            'user' => $user,
+            'date' => date("d-M-Y"),
+        ];
+        $pdf = Pdf::loadView('admin.user.print', $data);
+        return $pdf->download('user.pdf');
     }
 }

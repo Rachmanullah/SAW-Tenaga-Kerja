@@ -80,6 +80,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::post('/admin/user/store', 'store')->name('user.store');
         route::put('/admin/user/update', 'update')->name('user.update');
         route::get('/admin/user/delete/{id}', 'destroy')->name('user.delete');
+        route::get('/admin/user/print', 'print')->name('user.print');
     });
     //route data divisi
     Route::controller(DivisiController::class)->group(function () {
@@ -87,6 +88,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::post('/admin/divisi/store', 'store')->name('divisi.store');
         route::put('/admin/divisi/update', 'update')->name('divisi.update');
         route::get('/admin/divisi/delete/{id}', 'destroy')->name('divisi.delete');
+        route::get('/admin.divisi/print', 'print')->name('divisi.print');
     });
 
     //route data role
@@ -110,6 +112,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::post('/admin/lowongan/store', 'store')->name('lowongan.store');
         route::put('/admin/lowongan/update', 'update')->name('lowongan.update');
         route::get('/admin/lowongan/delete/{id}', 'destroy')->name('lowongan.delete');
+        route::get('/admin/lowongan/print', 'print')->name('lowongan.print');
     });
 
     //route data kriteria
@@ -137,6 +140,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/penilaian', 'index')->name('data.penilaian');
         route::get('/admin/penilaian/{id}', 'view')->name('penilaian.view');
         route::put('/admin/penilaian', 'inputNilai')->name('penilaian.input');
+        route::get('/admin/penilaian/print/{id}', 'print')->name('penilaian.print');
     });
 
     //route hasil saw

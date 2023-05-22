@@ -11,6 +11,7 @@ use App\Models\pelamar;
 use App\Models\pendaftaran;
 use App\Models\penilaianAlternatif;
 use App\Models\subKriteria;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class PenilaianController extends Controller
@@ -59,7 +60,6 @@ class PenilaianController extends Controller
             'subKriteria' => $subKriteria,
             'opsi' => $opsi,
         ];
-
         return view('admin.penilaian.nilai', $array, ['dataSAW' => $dataSAW]);
     }
     public function inputNilai(Request $request)
@@ -84,60 +84,49 @@ class PenilaianController extends Controller
         return redirect()->route('penilaian.view', ['id' => $request->lowongan_id])->with('message', 'Berhasil Input Nilai');
     }
 
-    public function test()
+    public function print($id)
     {
-        $nilai = penilaianAlternatif::where('lowongan_id', 1)->get();
-        // $daftar = pendaftaran::where('lowongan_id', 1)->get();
+        $lowker = lowongan::find($id);
+        $pelamar = pelamar::all();
+        $pendaftaran = pendaftaran::where('lowongan_id', $id)->get();
+        $penilaian = penilaianAlternatif::all();
+        $subKriteria = subKriteria::all();
+        $opsi = Opsi::all();
+        $nilai = penilaianAlternatif::where('lowongan_id', $id)->get();
+        $dataSAW = [];
         foreach ($nilai as $nilais) {
-            // foreach ($daftar as $daftars) {
-            // if ($daftars->pelamar_id == $nilais->pelamar_id) {
-            // $data[] = $nilais->normalisasi(1);
-            foreach ($nilais->normalisasi(1) as $dt) {
-                // foreach ($dt as $key) {
-                // var_dump($dt);
-                $array[] = $dt;
-                //  }
-            }
-            // }
-            // }
-        }
-
-        $pendaftaran = pendaftaran::where('lowongan_id', 1)->get();
-        foreach ($pendaftaran as $daftar) {
-            $akhir = 0;
-            foreach ($array as $key) {
-                if ($key['id'] == $daftar->pelamar_id) {
-                    $akhir += $key['hasil_saw'];
+            if ($nilais) {
+                foreach ($nilais->normalisasi($id) as $dt) {
+                    $dataSAW[] = $dt;
                 }
             }
-            var_dump($akhir);
-            hasilSaw::updateOrCreate(
-                ['pelamar_id' => 1],
-                ['hasil' => $akhir]
-            );
         }
-        // dd($array);
-        // foreach ($nilais->normalisasi(1) as $dt) {
-        //     // foreach ($dt as $key) {
-        //         var_dump($dt);
-        //     // }
-        // }
-        // return $data;
-
-        // $daftar = pendaftaran::where('lowongan_id', 1)->get();
-        // $bobot = bobotLowker::where('lowongan_id', 1)->get();
-        // $penilaian = penilaianAlternatif::all();
-        // foreach ($bobot as $bobots) {
-        //     foreach ($penilaian as $penilaians) {
-        //         if ($penilaians->kriteria_id == $bobots->kriteria_id) {
-        //             foreach ($daftar as $daftars) {
-        //                 if ($daftars->pelamar_id == $penilaians->pelamar_id) {
-        //                     $max = penilaianAlternatif::where('kriteria_id', $penilaians->kriteria_id)->max('nilai');
-        //                     echo $daftars->name . ' nilai = ' . $penilaians->nilai . ' nilai Max = ' . $max . ' Hasil = ' . round($penilaians->nilai / $max, 2) . '<br>';
-        //                 }
+        // if ($dataSAW) {
+        //     foreach ($pendaftaran as $pendaftar) {
+        //         $akhir = 0;
+        //         foreach ($dataSAW as $key) {
+        //             if ($key['id'] == $pendaftar->pelamar_id) {
+        //                 $akhir += $key['hasil_saw'];
         //             }
         //         }
+        // hasilSaw::updateOrCreate(
+        //     ['pelamar_id' => $pendaftar->pelamar_id],
+        //     ['hasil' => $akhir]
+        // );
         //     }
         // }
+
+        $array = [
+            'lowker' => $lowker,
+            'pelamar' => $pelamar,
+            'pendaftaran' => $pendaftaran,
+            'penilaian' => $penilaian,
+            'subKriteria' => $subKriteria,
+            'opsi' => $opsi,
+            'date' => date("d-M-Y"),
+            'dataSAW' => $dataSAW
+        ];
+        $pdf = Pdf::loadView('admin.penilaian.print', $array);
+        return $pdf->download('Data_Penilaian.pdf');
     }
 }

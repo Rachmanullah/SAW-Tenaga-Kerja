@@ -43,7 +43,7 @@ class PelamarController extends Controller
     public function destroy($id)
     {
         pelamar::find($id)->delete();
-        
+
         return redirect()->route('data.pelamar')->with('message', 'Berhasil Dihapus');
     }
 }

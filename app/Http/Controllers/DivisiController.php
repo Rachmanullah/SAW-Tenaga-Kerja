@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\divisi;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class DivisiController extends Controller
@@ -91,5 +92,16 @@ class DivisiController extends Controller
         $divisi = divisi::find($id)->delete();
 
         return redirect()->route('data.divisi')->with('message', 'Data Berhasil Dihapus');
+    }
+
+    public function print()
+    {
+        $divisi = divisi::all();
+        $data = [
+            'divisi' => $divisi,
+            'date' => date("d-M-Y"),
+        ];
+        $pdf = Pdf::loadView('admin.divisi.print', $data);
+        return $pdf->download('divisi.pdf');
     }
 }

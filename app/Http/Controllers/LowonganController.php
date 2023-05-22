@@ -6,6 +6,7 @@ use App\Models\bobotLowker;
 use App\Models\divisi;
 use App\Models\kriteria;
 use App\Models\lowongan;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class LowonganController extends Controller
@@ -142,5 +143,15 @@ class LowonganController extends Controller
         ];
 
         return view('lowker.index', $data);
+    }
+    public function print()
+    {
+        $lowker = lowongan::all();
+        $data = [
+            'lowker' => $lowker,
+            'date' => date("d-M-Y"),
+        ];
+        $pdf = Pdf::loadView('admin.lowongan.print', $data);
+        return $pdf->download('lowongan.pdf');
     }
 }
