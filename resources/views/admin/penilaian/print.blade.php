@@ -92,6 +92,7 @@
     <table class="table table-bordered">
         <tr class="text-center">
             <th>No</th>
+            <th>Alternatif</th>
             <th>Perhitungan</th>
             <th>Hasil</th>
         </tr>
