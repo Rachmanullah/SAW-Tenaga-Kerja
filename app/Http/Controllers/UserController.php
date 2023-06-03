@@ -49,10 +49,10 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => hash('sha512', $request->password),
             'phone' => $request->phone,
-            'role_id' => $request->role_id,
+            'role_id' => $request->position,
         ]);
         $user->save();
-        // return response()->json(['data' => $user], 200);
+        
         return redirect()->route('data.user')->with('message', 'data berhasil ditambahkan');
     }
 
