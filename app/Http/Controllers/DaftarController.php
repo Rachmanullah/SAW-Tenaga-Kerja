@@ -53,7 +53,6 @@ class DaftarController extends Controller
             'umur' => $request->umur,
             'jenis_kelamin' => $request->jk,
             'agama' => $request->agama,
-            // 'pendidikan_akhir' => $request->pendidikan_akhir,
             'alamat' => $request->alamat,
             'cv' => $cv
         ]);
@@ -62,30 +61,12 @@ class DaftarController extends Controller
         $pendaftaran = new pendaftaran([
             'pelamar_id' => $pelamar->id,
             'lowongan_id' => $request->lowongan_id,
+            'status' => 'Seleksi'
         ]);
         $pendaftaran->save();
 
         $bobotLowker = bobotLowker::where('lowongan_id', $request->lowongan_id)->get();
         foreach ($bobotLowker as $bobotLowkers) {
-            // if ($bobotLowkers->kriterias->subKriterias->count() > 0) {
-            //     $nilai = 0;
-            //     foreach ($bobotLowkers->kriterias->subKriterias as $subKriterias) {
-            //         $nilai += ($subKriterias->nilai_sub_kriteria / 100) * $request->sub_kriteria[$subKriterias->id];
-            //     }
-            //     $penilaian = new penilaianAlternatif([
-            //         'pelamar_id' => $pelamar->id,
-            //         'kriteria_id' => $bobotLowkers->kriterias->id,
-            //         'nilai' => $nilai,
-            //     ]);
-            //     $penilaian->save();
-            // } else {
-            // $penilaian = new penilaianAlternatif([
-            //     'pelamar_id' => $pelamar->id,
-            //     'kriteria_id' => $bobotLowkers->kriterias->id,
-            //     'nilai' => $request->data[str_replace(' ', '_', $bobotLowkers->kriterias->kriteria)],
-            // ]);
-            // $penilaian->save();
-            // }
             $penilaian = new penilaianAlternatif([
                 'pelamar_id' => $pelamar->id,
                 'lowongan_id' => $request->lowongan_id,

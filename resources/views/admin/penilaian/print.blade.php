@@ -79,7 +79,7 @@
                 {{ $pendaftarans->pelamars->name }}
             </td>
             @foreach($dataSAW as $datas )
-            @if($datas['id'] == $pendaftarans->pelamar_id)
+            @if($datas['pelamar_id'] == $pendaftarans->pelamar_id)
             <td>
                 {{ $datas['hasil_normalisasi'] }}
             </td>
@@ -95,6 +95,7 @@
             <th>Alternatif</th>
             <th>Perhitungan</th>
             <th>Hasil</th>
+            <th>Ranking</th>
         </tr>
         @php
         $no = 1;
@@ -112,7 +113,7 @@
             @endphp
             <td>
                 @foreach($dataSAW as $datas )
-                @if($datas['id'] == $pendaftarans->pelamar_id)
+                @if($datas['pelamar_id'] == $pendaftarans->pelamar_id)
                 ({{ $datas['bobot_kriteria'] }} x {{ $datas['hasil_normalisasi'] }})
                 @php
                     $total_akhir += $datas['hasil_saw']
@@ -123,6 +124,11 @@
             <td>
                 {{ $total_akhir }}
             </td>
+            @foreach ($ranking as $rankings)
+                @if($rankings['pelamar_id'] == $pendaftarans->pelamar_id)
+                    <td class="px-6 py-4"> {{ $rankings['ranking'] }}</td>
+                @endif
+            @endforeach
         </tr>
         @endforeach
     </table>

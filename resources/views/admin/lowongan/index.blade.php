@@ -35,6 +35,9 @@
                         Kuota
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Batas Diterima
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Divisi
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -68,6 +71,9 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $lowker->kuota }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $lowker->batas_diterima }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lowker->divisis->divisi }}
@@ -117,6 +123,10 @@
                                     <div>
                                         <label for="kuota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kuota</label>
                                         <input type="number" name="kuota" id="kuota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $lowker->kuota }}" required autocomplete="off">
+                                    </div>
+                                    <div>
+                                        <label for="batas_diterima" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Batas Diterima</label>
+                                        <input type="number" name="batas_diterima" id="batas_diterima" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $lowker->batas_diterima }}" required autocomplete="off">
                                     </div>
                                     <div>
                                         <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Divisi</label>
@@ -198,6 +208,10 @@
                         <div>
                             <label for="kuota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kuota</label>
                             <input type="number" name="kuota" id="kuota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
+                        </div>
+                        <div>
+                            <label for="batas_diterima" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Batas Diterima</label>
+                            <input type="number" name="batas_diterima" id="batas_diterima" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
                         </div>
                         <div>
                             <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Divisi</label>

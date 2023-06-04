@@ -55,6 +55,7 @@ class LowonganController extends Controller
             'tgl_ditutup' => $request->tgl_ditutup,
             'lowongan_kerja' => $request->lowongan_kerja,
             'kuota' => $request->kuota,
+            'batas_diterima' => $request->batas_diterima,
             'divisi_id' => $request->divisi_id,
             'status' => $request->status,
         ]);
@@ -108,6 +109,7 @@ class LowonganController extends Controller
             'tgl_ditutup' => $request->tgl_ditutup,
             'lowongan_kerja' => $request->lowongan_kerja,
             'kuota' => $request->kuota,
+            'batas_diterima' => $request->batas_diterima,
             'divisi_id' => $request->divisi_id,
             'status' => $request->status,
         ]);

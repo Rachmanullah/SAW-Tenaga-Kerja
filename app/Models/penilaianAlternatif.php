@@ -41,21 +41,21 @@ class penilaianAlternatif extends Model
                 $min = penilaianAlternatif::where('kriteria_id', $this->kriteria_id)
                     ->where('lowongan_id', $id)
                     ->min('nilai');
-                if ($bobots->kriterias->kategori == "Benefit") {
-                    $hasil_normalisasi = round($this->nilai / $max, 2);
-                }else{
-                    if (!$this->nilai == 0.00) {
+                if (!$this->nilai == 0.00) {
+                    if ($bobots->kriterias->kategori == "Benefit") {
+                        $hasil_normalisasi = round($this->nilai / $max, 2);
+                    } else {
                         $hasil_normalisasi = round($min / $this->nilai, 2);
-                    }else{
-                        $hasil_normalisasi = 0.00;
                     }
+                } else {
+                    $hasil_normalisasi = 0.00;
                 }
                 // $nilai_kategori = ($bobots->kriterias->kategori == "Benefit") ? $max : $min;
                 $hasil_saw = $this->kriterias->bobot * $hasil_normalisasi;
 
                 // if ($this->nilai) {
                 $data[] = [
-                    'id' => $this->pelamar_id,
+                    'pelamar_id' => $this->pelamar_id,
                     'name' => $this->pelamars->name,
                     'nilai_alternatif' => $this->nilai,
                     'kriteria_id' => $this->kriteria_id,

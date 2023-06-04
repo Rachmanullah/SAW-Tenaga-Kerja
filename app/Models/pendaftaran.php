@@ -11,6 +11,7 @@ class pendaftaran extends Model
     protected $fillable = [
         'pelamar_id',
         'lowongan_id',
+        'status',
     ];
 
     public function pelamars()

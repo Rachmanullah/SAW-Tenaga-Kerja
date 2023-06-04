@@ -19,9 +19,10 @@ return new class extends Migration
             $table->date('tgl_ditutup');
             $table->string('lowongan_kerja');
             $table->integer('kuota');
+            $table->integer('batas_diterima');
             $table->enum('status', ['Buka', 'Tutup', 'Penuh']);
             $table->unsignedBigInteger('divisi_id');
-            $table->foreign('divisi_id')->references('id')->on('divisis')->noActionOnDelete();
+            $table->foreign('divisi_id')->references('id')->on('divisis')->cascadeOnDelete();
             $table->timestamps();
         });
     }

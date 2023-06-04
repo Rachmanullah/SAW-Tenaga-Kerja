@@ -163,7 +163,7 @@
                         {{ $pendaftarans->pelamars->name }}
                     </td>
                     @foreach($dataSAW as $datas )
-                            @if($datas['id'] == $pendaftarans->pelamar_id)
+                            @if($datas['pelamar_id'] == $pendaftarans->pelamar_id)
                                 <td class="px-6 py-4">
                                     {{ $datas['hasil_normalisasi'] }}
                                 </td>
@@ -200,6 +200,9 @@
                     <th scope="col" class="px-6 py-3">
                         Hasil
                     </th>
+                    {{-- <th scope="col" class="px-6 py-3">
+                        Ranking
+                    </th> --}}
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -219,7 +222,7 @@
                     @endphp
                     <td class="px-6 py-4">
                         @foreach($dataSAW as $datas )
-                            @if($datas['id'] == $pendaftarans->pelamar_id)
+                            @if($datas['pelamar_id'] == $pendaftarans->pelamar_id)
                                 ({{ $datas['bobot_kriteria'] }} x {{ $datas['hasil_normalisasi'] }})
                                 @php
                                     $total_akhir += $datas['hasil_saw']
@@ -230,6 +233,11 @@
                     <td class="px-6 py-4">
                         {{ $total_akhir }}
                     </td>
+                    {{-- @foreach ($ranking as $rankings)
+                        @if($rankings['pelamar_id'] == $pendaftarans->pelamar_id)
+                            <td class="px-6 py-4"> {{ $rankings['ranking'] }}</td>
+                        @endif
+                    @endforeach --}}
                 </tr>
                     @empty($lowker)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -242,5 +250,102 @@
             </tbody>
         </table>
     </div>
-</div>
+    <p class="mt-3">
+        Setelah Dilakukan Perhitungan Dengan Metode SAW maka didapatkan {{ $lowker->batas_diterima }} Peserta dengan nilai terbesar yaitu
+    </p>
+    <div class="overflow-x-auto shadow-md mt-5 sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            No
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Alternatif
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Hasil
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Ranking
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @php
+                    $no = 1;
+                    @endphp
+                    @foreach($ranking as $rankings)
+                    {{-- @if($rankings['ranking'] <= $lowker->batas_diterima) --}}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $no++ }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $rankings['name'] }}
+                        </td>
+                        @php
+                        $total_akhir = 0;
+                        @endphp
+                        <td class="px-6 py-4">
+                            @foreach($dataSAW as $datas )
+                                @if($datas['pelamar_id'] == $rankings['pelamar_id'])
+                                    @php
+                                        $total_akhir += $datas['hasil_saw']
+                                    @endphp
+                                @endif
+                            @endforeach
+                            {{ $total_akhir }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $rankings['ranking'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            @if(!$rankings['hasil_saw'] == 0)
+                            <a href="#" data-modal-target="status-modal{{ $rankings['pelamar_id'] }}" data-modal-toggle="status-modal{{ $rankings['pelamar_id'] }}" class="font-medium hover:underline bg-blue-500 p-1 text-black" type="button">Terima</a>
+                            @endif
+                        </td>
+                        <div id="status-modal{{ $rankings['pelamar_id'] }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+                            <div class="relative w-full h-full max-w-md md:h-auto">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="status-modal{{ $rankings['pelamar_id'] }}">
+                                        <i class="fa-solid fa-xmark fa-beat"></i>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <div class="px-6 py-6 lg:px-8">
+                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{{ $rankings['name'] }}</h3>
+                                        <form class="space-y-1" action="{{ route('penilaian.input',['id' => $rankings['pelamar_id']]) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                                <div class="relative z-0 w-full mb-1 group">
+                                                    <label class="text-sm text-gray-500 dark:text-gray-400" id="labelSatus">Status</label>
+                                                    <select id="status" required name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <Option value="Terima">Terima</Option>
+                                                        <Option value="Tidak Terima">Tidak Terima</Option>
+                                                    </select>
+                                                </div>
+                                            <button type="submit" class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                        @empty($rankings)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap colspan-5 dark:text-white">
+                            Data Tidak Ada
+                        </td>
+                    </tr>
+                    {{-- @endif --}}
+                    @endempty
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection

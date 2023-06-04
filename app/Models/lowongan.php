@@ -14,6 +14,7 @@ class lowongan extends Model
         'tgl_ditutup',
         'lowongan_kerja',
         'kuota',
+        'batas_diterima',
         'status',
         'divisi_id'
     ];

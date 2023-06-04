@@ -21,6 +21,7 @@ class PenilaianController extends Controller
         $lowker = lowongan::all();
         return view('admin.penilaian.index', ['lowker' => $lowker]);
     }
+
     public function view($id)
     {
         $lowker = lowongan::find($id);
@@ -31,6 +32,7 @@ class PenilaianController extends Controller
         $opsi = Opsi::all();
         $nilai = penilaianAlternatif::where('lowongan_id', $id)->get();
         $dataSAW = [];
+        $dataBaru = [];
         foreach ($nilai as $nilais) {
             if ($nilais) {
                 foreach ($nilais->normalisasi($id) as $dt) {
@@ -38,20 +40,94 @@ class PenilaianController extends Controller
                 }
             }
         }
+        // if ($dataSAW) {
+        //     foreach ($pendaftaran as $pendaftar) {
+        //         $akhir = 0;
+        //         foreach ($dataSAW as $key) {
+
+        //             if ($key['id'] == $pendaftar->pelamar_id) {
+        //                 // Memeriksa apakah ID sudah ada dalam $dataBaru sebelum menambahkannya
+        //                 $found = false;
+        //                 $akhir += $key['hasil_saw'];
+        //                 foreach ($dataBaru as $item) {
+        //                     if ($item['pelamar_id'] == $key['id']) {
+        //                         $found = true;
+        //                         break;
+        //                     }
+        //                 }
+        //                 // Jika ID belum ada dalam $dataBaru, tambahkan data baru
+        //                 if (!$found) {
+        //                     $dataBaru[] = [
+        //                         'pelamar_id' => $key['id'],
+        //                         'name' => $key['name'],
+        //                         'hasil_saw' => $akhir
+        //                     ];
+        //                 }
+        //                 if($found){
+        //                     $dataBaru['hasil_saw'] = $akhir;
+        //                 }
+        //             }
+        //         }
+        //         hasilSaw::updateOrCreate(
+        //             ['pelamar_id' => $pendaftar->pelamar_id],
+        //             ['hasil' => $akhir]
+        //         );
+        //     }
+        //     dd($dataBaru);
+        //     die;
+        // }
         if ($dataSAW) {
             foreach ($pendaftaran as $pendaftar) {
                 $akhir = 0;
+
                 foreach ($dataSAW as $key) {
-                    if ($key['id'] == $pendaftar->pelamar_id) {
+                    if ($key['pelamar_id'] == $pendaftar->pelamar_id) {
+                        $found = false;
                         $akhir += $key['hasil_saw'];
+
+                        foreach ($dataBaru as &$item) {
+                            if ($item['pelamar_id'] == $key['pelamar_id']) {
+                                $found = true;
+                                $item['hasil_saw'] = $akhir;
+                                break;
+                            }
+                        }
+
+                        if (!$found) {
+                            $dataBaru[] = [
+                                'pelamar_id' => $key['pelamar_id'],
+                                'name' => $key['name'],
+                                'bobot_kriteria' => $key['bobot_kriteria'],
+                                'hasil_normalisasi' => $key['hasil_normalisasi'],
+                                'hasil_saw' => $akhir
+                            ];
+                        }
                     }
                 }
+
+                usort($dataBaru, function ($a, $b) {
+                    return $b['hasil_saw'] <=> $a['hasil_saw'];
+                });
+
+                $ranking = 1;
+                foreach ($dataBaru as &$item) {
+                    $item['ranking'] = $ranking;
+                    $ranking++;
+                }
+                $topThree = array_slice($dataBaru, 0, $lowker->batas_diterima);
+                // foreach ($topThree as $item) {
+                //     echo "Peringkat: " . $item['ranking'] . "\n";
+                //     echo "Nama: " . $item['name'] . "\n";
+                //     // Tambahkan informasi lain yang ingin ditampilkan dalam kesimpulan
+                //     echo "\n";
+                // }
                 hasilSaw::updateOrCreate(
                     ['pelamar_id' => $pendaftar->pelamar_id],
                     ['hasil' => $akhir]
                 );
             }
         }
+
         $array = [
             'lowker' => $lowker,
             'pelamar' => $pelamar,
@@ -59,7 +135,9 @@ class PenilaianController extends Controller
             'penilaian' => $penilaian,
             'subKriteria' => $subKriteria,
             'opsi' => $opsi,
+            'ranking' => $dataBaru
         ];
+
         return view('admin.penilaian.nilai', $array, ['dataSAW' => $dataSAW]);
     }
     public function inputNilai(Request $request)
@@ -94,6 +172,7 @@ class PenilaianController extends Controller
         $opsi = Opsi::all();
         $nilai = penilaianAlternatif::where('lowongan_id', $id)->get();
         $dataSAW = [];
+        $dataBaru = [];
         foreach ($nilai as $nilais) {
             if ($nilais) {
                 foreach ($nilais->normalisasi($id) as $dt) {
@@ -101,21 +180,49 @@ class PenilaianController extends Controller
                 }
             }
         }
-        // if ($dataSAW) {
-        //     foreach ($pendaftaran as $pendaftar) {
-        //         $akhir = 0;
-        //         foreach ($dataSAW as $key) {
-        //             if ($key['id'] == $pendaftar->pelamar_id) {
-        //                 $akhir += $key['hasil_saw'];
-        //             }
-        //         }
-        // hasilSaw::updateOrCreate(
-        //     ['pelamar_id' => $pendaftar->pelamar_id],
-        //     ['hasil' => $akhir]
-        // );
-        //     }
-        // }
+        foreach ($pendaftaran as $pendaftar) {
+            $akhir = 0;
 
+            foreach ($dataSAW as $key) {
+                if ($key['pelamar_id'] == $pendaftar->pelamar_id) {
+                    $found = false;
+                    $akhir += $key['hasil_saw'];
+
+                    foreach ($dataBaru as &$item) {
+                        if ($item['pelamar_id'] == $key['pelamar_id']) {
+                            $found = true;
+                            $item['hasil_saw'] = $akhir;
+                            break;
+                        }
+                    }
+
+                    if (!$found) {
+                        $dataBaru[] = [
+                            'pelamar_id' => $key['pelamar_id'],
+                            'name' => $key['name'],
+                            'bobot_kriteria' => $key['bobot_kriteria'],
+                            'hasil_normalisasi' => $key['hasil_normalisasi'],
+                            'hasil_saw' => $akhir
+                        ];
+                    }
+                }
+            }
+
+            usort($dataBaru, function ($a, $b) {
+                return $b['hasil_saw'] <=> $a['hasil_saw'];
+            });
+
+            $ranking = 1;
+            foreach ($dataBaru as &$item) {
+                $item['ranking'] = $ranking;
+                $ranking++;
+            }
+
+            hasilSaw::updateOrCreate(
+                ['pelamar_id' => $pendaftar->pelamar_id],
+                ['hasil' => $akhir]
+            );
+        }
         $array = [
             'lowker' => $lowker,
             'pelamar' => $pelamar,
@@ -124,9 +231,16 @@ class PenilaianController extends Controller
             'subKriteria' => $subKriteria,
             'opsi' => $opsi,
             'date' => date("d-M-Y"),
-            'dataSAW' => $dataSAW
+            'dataSAW' => $dataSAW,
+            'ranking' => $dataBaru,
         ];
         $pdf = Pdf::loadView('admin.penilaian.print', $array);
         return $pdf->download('Data_Penilaian.pdf');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $data = pendaftaran::find($id)->update(['status' => $request->status]);
+        return redirect()->route('penilaian.view', ['id' => $data->lowongan_id])->with('message', 'Berhasil Update Status');
     }
 }
