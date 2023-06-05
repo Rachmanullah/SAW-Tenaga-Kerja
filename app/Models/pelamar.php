@@ -32,4 +32,7 @@ class pelamar extends Model
     {
         return $this->hasMany(penilaianAlternatif::class);
     }
+    public function hasil_saws(){
+        return $this->hasOne(hasilSaw::class);
+    }
 }

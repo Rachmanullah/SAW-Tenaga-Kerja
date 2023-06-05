@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('opsis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sub_kriteria_id');
-            $table->foreign('sub_kriteria_id')->references('id')->on('sub_kriterias')->noActionOnDelete();
+            $table->foreign('sub_kriteria_id')->references('id')->on('sub_kriterias')->onDelete('cascade');
             $table->string('opsi');
             $table->integer('nilai_opsi');
             $table->timestamps();

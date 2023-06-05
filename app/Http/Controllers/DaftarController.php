@@ -76,9 +76,15 @@ class DaftarController extends Controller
             $penilaian->save();
         }
 
-        $jmlkuota = lowongan::find($request->lowongan_id);
-        $jmlkuota->kuota = $jmlkuota->kuota - 1;
-        $jmlkuota->save();
-        return redirect()->route('lowongan')->with('message', 'Anda telah berhasil mendaftar, tunggu panggilan anda melalui email');
+        // $jmlkuota = lowongan::find($request->lowongan_id);
+        // // $jmlkuota->kuota = $jmlkuota->kuota - 1;
+        // $jmlkuota->save();
+        return redirect()->route('lowongan')->with('message', 'Anda telah berhasil mendaftar, tunggu Pengumuman pada website kami');
+    }
+
+    public function pengumuman($id){
+       $pendaftar = pendaftaran::where('lowongan_id', $id)->with('pelamars')->get();
+    //    dd($pendaftar);
+       return view('lowker.pengumuman', compact('pendaftar'));
     }
 }

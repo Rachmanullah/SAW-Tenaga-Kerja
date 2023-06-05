@@ -251,7 +251,7 @@
         </table>
     </div>
     <p class="mt-3">
-        Setelah Dilakukan Perhitungan Dengan Metode SAW maka didapatkan {{ $lowker->batas_diterima }} Peserta dengan nilai terbesar yaitu
+        Setelah Dilakukan Perhitungan Dengan Metode SAW maka didapatkan {{ $lowker->kuota }} Peserta dengan nilai terbesar yaitu
     </p>
     <div class="overflow-x-auto shadow-md mt-5 sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -305,7 +305,7 @@
                         </td>
                         <td class="px-6 py-4">
                             @if(!$rankings['hasil_saw'] == 0)
-                            <a href="#" data-modal-target="status-modal{{ $rankings['pelamar_id'] }}" data-modal-toggle="status-modal{{ $rankings['pelamar_id'] }}" class="font-medium hover:underline bg-blue-500 p-1 text-black" type="button">Terima</a>
+                            <a href="#" data-modal-target="status-modal{{ $rankings['pelamar_id'] }}" data-modal-toggle="status-modal{{ $rankings['pelamar_id'] }}" class="font-medium hover:underline bg-blue-500 p-1 text-black" type="button">Aksi</a>
                             @endif
                         </td>
                         <div id="status-modal{{ $rankings['pelamar_id'] }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
@@ -318,12 +318,13 @@
                                     </button>
                                     <div class="px-6 py-6 lg:px-8">
                                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{{ $rankings['name'] }}</h3>
-                                        <form class="space-y-1" action="{{ route('penilaian.input',['id' => $rankings['pelamar_id']]) }}" method="post">
+                                        <form class="space-y-1" action="{{ route('penilaian.updateStatus',['id' => $rankings['pelamar_id']]) }}" method="post">
                                             @method('PUT')
                                             @csrf
                                                 <div class="relative z-0 w-full mb-1 group">
                                                     <label class="text-sm text-gray-500 dark:text-gray-400" id="labelSatus">Status</label>
                                                     <select id="status" required name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <option disabled selected>Pilih Status</option>
                                                         <Option value="Terima">Terima</Option>
                                                         <Option value="Tidak Terima">Tidak Terima</Option>
                                                     </select>

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('hasil_saws', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pelamar_id');
-            $table->foreign('pelamar_id')->references('id')->on('pelamars')->noActionOnDelete();
+            $table->foreign('pelamar_id')->references('id')->on('pelamars')->onDelete('cascade');
             $table->float('hasil');
             $table->timestamps();
         });

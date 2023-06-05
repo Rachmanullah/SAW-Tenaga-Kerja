@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sub_kriterias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kriteria_id');
-            $table->foreign('kriteria_id')->references('id')->on('kriterias')->noActionOnDelete();
+            $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
             $table->string('sub_kriteria');
             $table->integer('nilai_sub_kriteria');
             $table->timestamps();

@@ -89,6 +89,7 @@ class DivisiController extends Controller
      */
     public function destroy($id)
     {
+        
         $divisi = divisi::find($id)->delete();
 
         return redirect()->route('data.divisi')->with('message', 'Data Berhasil Dihapus');

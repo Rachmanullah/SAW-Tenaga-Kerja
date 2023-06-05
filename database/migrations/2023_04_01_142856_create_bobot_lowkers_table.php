@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('bobot_lowkers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lowongan_id');
-            $table->foreign('lowongan_id')->references('id')->on('lowongans')->noActionOnDelete();
+            $table->foreign('lowongan_id')->references('id')->on('lowongans')->onDelete('cascade');
             $table->unsignedBigInteger('kriteria_id');
-            $table->foreign('kriteria_id')->references('id')->on('kriterias')->noActionOnDelete();
+            $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
             $table->timestamps();
         });
     }

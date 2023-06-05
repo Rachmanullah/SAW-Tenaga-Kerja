@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                @empty($divisi)
+                @empty($data)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap colspan-5 dark:text-white">
                         Data Tidak Ada

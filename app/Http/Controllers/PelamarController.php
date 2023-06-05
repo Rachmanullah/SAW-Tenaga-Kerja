@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\lowongan;
 use App\Models\pelamar;
 use App\Models\pendaftaran;
+use App\Models\penilaianAlternatif;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,22 @@ class PelamarController extends Controller
         return $pdf->download('pelamar.pdf');
     }
 
+    public function search(Request $request)
+    {
+        $pelamar = pelamar::where('name', 'like', '%' . $request->search . '%')->get();
+        $lowker = lowongan::all();
+        $array = [
+            'data' => $pelamar,
+            'lowker' => $lowker,
+        ];
+
+        return view('admin.pelamar.index', $array);
+    }
+
     public function destroy($id)
     {
+        penilaianAlternatif::where('pelamar_id', $id)->delete();
+        pendaftaran::where('pelamar_id', $id)->delete();
         pelamar::find($id)->delete();
 
         return redirect()->route('data.pelamar')->with('message', 'Berhasil Dihapus');

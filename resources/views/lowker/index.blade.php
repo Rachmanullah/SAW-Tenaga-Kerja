@@ -73,12 +73,14 @@
                     </td>
                     <td class="px-6 py-4x space-x-3">
                         {{-- <a href="#" class="font-medium hover:underline" type="button" data-modal-target="updateKriteria-modal{{ $lowongans->id }}" data-modal-toggle="updateKriteria-modal{{ $lowongans->id }}"><i class="fa-solid fa-pen fa-beat" style="color: #ffffff;"></i></a> --}}
-                        @if($lowongans->kuota === 0)
-                        <a class="font-medium">Kuota Habis</a>
-                        @elseif($lowongans->status == "Tutup")
-                        <a class="font-medium">Tutup</a>
+                        {{-- @if($lowongans->kuota === 0)
+                        <a class="font-medium">Kuota Habis</a> --}}
+                        @if($lowongans->status == "Tutup")
+                            <a class="font-medium">Tutup</a>
+                        @elseif($lowongans->status == "Selesai")
+                            <a href="{{ route('pengumuman', ['id' => $lowongans->id ]) }}" class="font-medium hover:underline"> Lihat Pengumuman</a>
                         @else
-                        <a href="{{ route('daftar', ['id' => $lowongans->id ]) }}" class="font-medium hover:underline"> Daftar</a>
+                            <a href="{{ route('daftar', ['id' => $lowongans->id ]) }}" class="font-medium hover:underline"> Daftar</a>
                         @endif
                     </td>
                 </tr>

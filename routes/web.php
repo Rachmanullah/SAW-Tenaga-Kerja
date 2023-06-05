@@ -45,6 +45,7 @@ Route::get('/lowongan', [LowonganController::class, 'tampilkan'])->name('lowonga
 route::controller(DaftarController::class)->group(function () {
     route::get('/daftar/{id}', 'daftar')->name('daftar');
     route::post('/daftar/store', 'store')->name('daftar.store');
+    route::get('/lowongan/pengumuman/{id}', 'pengumuman')->name('pengumuman');
 });
 
 
@@ -104,6 +105,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/pelamar', 'index')->name('data.pelamar');
         route::post('/admin/pelamar/print', 'print')->name('pelamar.print');
         route::get('/admin/pelamar/destroy/{id}', 'destroy')->name('pelamar.destroy');
+        route::post('/admin/pelamar', 'search')->name('pelamar.search');
     });
 
     //route data lowongan
@@ -141,6 +143,7 @@ route::middleware([is_Auth::class])->group(function () {
         route::get('/admin/penilaian/{id}', 'view')->name('penilaian.view');
         route::put('/admin/penilaian', 'inputNilai')->name('penilaian.input');
         route::get('/admin/penilaian/print/{id}', 'print')->name('penilaian.print');
+        route::put('/admin/penilaian/status/{id}', 'updateStatus')->name('penilaian.updateStatus');
     });
 
     //route hasil saw

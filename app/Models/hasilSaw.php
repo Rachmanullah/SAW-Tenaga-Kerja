@@ -13,4 +13,8 @@ class hasilSaw extends Model
         'pelamar_id',
         'hasil',
     ];
+
+    public function pelamars(){
+        return $this->belongsTo(pelamar::class, 'pelamar_id');
+    }
 }

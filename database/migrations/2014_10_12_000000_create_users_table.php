@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles')->noActionOnDelete();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();

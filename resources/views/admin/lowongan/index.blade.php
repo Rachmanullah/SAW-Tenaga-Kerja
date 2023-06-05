@@ -35,9 +35,6 @@
                         Kuota
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Batas Diterima
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Divisi
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -71,9 +68,6 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $lowker->kuota }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $lowker->batas_diterima }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lowker->divisis->divisi }}
@@ -125,10 +119,6 @@
                                         <input type="number" name="kuota" id="kuota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $lowker->kuota }}" required autocomplete="off">
                                     </div>
                                     <div>
-                                        <label for="batas_diterima" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Batas Diterima</label>
-                                        <input type="number" name="batas_diterima" id="batas_diterima" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $lowker->batas_diterima }}" required autocomplete="off">
-                                    </div>
-                                    <div>
                                         <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Divisi</label>
                                         <select id="divisi" name="divisi_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option seelcted value="{{ $lowker->divisi_id }}">{{ $lowker->divisis->divisi }}</option>
@@ -145,6 +135,7 @@
                                             <option disabled>Choose a Status</option>
                                             <option value="Buka">Buka</option>
                                             <option value="Tutup">Tutup</option>
+                                            <option value="Selesai">Selesai</option>
                                         </select>
                                     </div>
                                     @foreach($bobotLowker as $bobotLowkers)
@@ -208,10 +199,6 @@
                         <div>
                             <label for="kuota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kuota</label>
                             <input type="number" name="kuota" id="kuota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
-                        </div>
-                        <div>
-                            <label for="batas_diterima" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Batas Diterima</label>
-                            <input type="number" name="batas_diterima" id="batas_diterima" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
                         </div>
                         <div>
                             <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Divisi</label>

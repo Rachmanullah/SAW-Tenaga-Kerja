@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('penilaian_alternatifs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pelamar_id');
-            $table->foreign('pelamar_id')->references('id')->on('pelamars')->noActionOnDelete();
+            $table->foreign('pelamar_id')->references('id')->on('pelamars')->onDelete('cascade');
             $table->unsignedBigInteger('lowongan_id');
-            $table->foreign('lowongan_id')->references('id')->on('lowongans')->noActionOnDelete();
+            $table->foreign('lowongan_id')->references('id')->on('lowongans')->onDelete('cascade');
             $table->unsignedBigInteger('kriteria_id');
-            $table->foreign('kriteria_id')->references('id')->on('kriterias')->noActionOnDelete();
+            $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
             $table->float('nilai');
             $table->timestamps();
         });

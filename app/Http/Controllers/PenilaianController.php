@@ -240,7 +240,8 @@ class PenilaianController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $data = pendaftaran::find($id)->update(['status' => $request->status]);
+        $data = pendaftaran::where('pelamar_id', $id)->first();
+        $data->update(['status' => $request->status]);
         return redirect()->route('penilaian.view', ['id' => $data->lowongan_id])->with('message', 'Berhasil Update Status');
     }
 }
