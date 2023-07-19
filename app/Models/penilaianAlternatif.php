@@ -50,10 +50,9 @@ class penilaianAlternatif extends Model
                 } else {
                     $hasil_normalisasi = 0.00;
                 }
-                // $nilai_kategori = ($bobots->kriterias->kategori == "Benefit") ? $max : $min;
+
                 $hasil_saw = $this->kriterias->bobot * $hasil_normalisasi;
 
-                // if ($this->nilai) {
                 $data[] = [
                     'pelamar_id' => $this->pelamar_id,
                     'name' => $this->pelamars->name,
@@ -64,18 +63,6 @@ class penilaianAlternatif extends Model
                     'hasil_normalisasi' => $hasil_normalisasi,
                     'hasil_saw' => $hasil_saw
                 ];
-                //     } else {
-                //         $data[] = [
-                //             'id' => $this->pelamar_id,
-                //             'name' => $this->pelamars->name,
-                //             'nilai_alternatif' => 0,
-                //             'kriteria_id' => $this->kriteria_id,
-                //             'nilai_kategori' => $nilai_kategori,
-                //             'bobot_kriteria' => $this->kriterias->bobot,
-                //             'hasil_normalisasi' => 0,
-                //             'hasil_saw' => 0
-                //         ];
-                //     }
             }
         }
         return $data;

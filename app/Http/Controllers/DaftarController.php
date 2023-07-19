@@ -4,21 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\bobotLowker;
 use App\Models\kriteria;
-use App\Models\lowongan;
 use App\Models\Opsi;
 use App\Models\pelamar;
 use App\Models\pendaftaran;
 use App\Models\penilaianAlternatif;
 use App\Models\subKriteria;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\File;
+
 
 class DaftarController extends Controller
 {
     public function daftar($id)
     {
-        //$lowongan = lowongan::find($id);
         $bobotLowker = bobotLowker::where('lowongan_id', $id)->get();
         $kriteria = kriteria::all();
         $subKriteria = subKriteria::all();
@@ -76,15 +73,11 @@ class DaftarController extends Controller
             $penilaian->save();
         }
 
-        // $jmlkuota = lowongan::find($request->lowongan_id);
-        // // $jmlkuota->kuota = $jmlkuota->kuota - 1;
-        // $jmlkuota->save();
         return redirect()->route('lowongan')->with('message', 'Anda telah berhasil mendaftar, tunggu Pengumuman pada website kami');
     }
 
     public function pengumuman($id){
        $pendaftar = pendaftaran::where('lowongan_id', $id)->with('pelamars')->get();
-    //    dd($pendaftar);
        return view('lowker.pengumuman', compact('pendaftar'));
     }
 }

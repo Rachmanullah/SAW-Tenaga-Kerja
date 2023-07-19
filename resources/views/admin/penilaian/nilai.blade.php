@@ -86,7 +86,6 @@
                                             <input class="form-control" type="text" name="lowongan_id" value="{{ $pendaftarans->lowongans->id }}" hidden readonly >
                                             @foreach($lowker->bobotLowker as $bobotLowkers)
                                             <h3 class="text-sm text-white">Input Penilaian {{ $bobotLowkers->kriterias->kriteria }}</h3>
-                                            {{-- <div class="grid md:grid-cols-2 md:gap-5"> --}}
                                                 @if($bobotLowkers->kriterias->subKriterias->count() > 0)
                                                     @foreach($subKriteria as $subKriterias)
                                                         @if($subKriterias->kriteria_id == $bobotLowkers->kriterias->id)
@@ -109,7 +108,6 @@
                                                         <label for="umur" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ $bobotLowkers->kriterias->kriteria }}</label>
                                                     </div>
                                                 @endif
-                                            {{-- </div> --}}
                                             @endforeach
                                             <button type="submit" class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                                         </form>
@@ -200,9 +198,6 @@
                     <th scope="col" class="px-6 py-3">
                         Hasil
                     </th>
-                    {{-- <th scope="col" class="px-6 py-3">
-                        Ranking
-                    </th> --}}
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -233,11 +228,6 @@
                     <td class="px-6 py-4">
                         {{ $total_akhir }}
                     </td>
-                    {{-- @foreach ($ranking as $rankings)
-                        @if($rankings['pelamar_id'] == $pendaftarans->pelamar_id)
-                            <td class="px-6 py-4"> {{ $rankings['ranking'] }}</td>
-                        @endif
-                    @endforeach --}}
                 </tr>
                     @empty($lowker)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -279,7 +269,6 @@
                     $no = 1;
                     @endphp
                     @foreach($ranking as $rankings)
-                    {{-- @if($rankings['ranking'] <= $lowker->batas_diterima) --}}
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $no++ }}
@@ -342,7 +331,6 @@
                             Data Tidak Ada
                         </td>
                     </tr>
-                    {{-- @endif --}}
                     @endempty
                     @endforeach
                 </tbody>

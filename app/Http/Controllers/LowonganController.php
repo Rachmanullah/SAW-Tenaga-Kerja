@@ -6,7 +6,6 @@ use App\Models\bobotLowker;
 use App\Models\divisi;
 use App\Models\kriteria;
 use App\Models\lowongan;
-use App\Models\pendaftaran;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -32,31 +31,13 @@ class LowonganController extends Controller
         return view('admin.lowongan.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // dd($request);
         $data = new lowongan([
             'tgl_dimulai' => $request->tgl_dimulai,
             'tgl_ditutup' => $request->tgl_ditutup,
             'lowongan_kerja' => $request->lowongan_kerja,
             'kuota' => $request->kuota,
-            // 'batas_diterima' => $request->batas_diterima,
             'divisi_id' => $request->divisi_id,
             'status' => $request->status,
         ]);
@@ -73,35 +54,6 @@ class LowonganController extends Controller
         return redirect()->route('data.lowongan')->with('message', 'Berhasil Ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         // dd($request);
@@ -110,7 +62,6 @@ class LowonganController extends Controller
             'tgl_ditutup' => $request->tgl_ditutup,
             'lowongan_kerja' => $request->lowongan_kerja,
             'kuota' => $request->kuota,
-            // 'batas_diterima' => $request->batas_diterima,
             'divisi_id' => $request->divisi_id,
             'status' => $request->status,
         ]);

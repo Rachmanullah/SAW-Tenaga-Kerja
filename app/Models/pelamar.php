@@ -17,7 +17,6 @@ class pelamar extends Model
         'umur',
         'agama',
         'alamat',
-        // 'pendidikan_terakhir',
         'email',
         'no_telp',
         'cv'

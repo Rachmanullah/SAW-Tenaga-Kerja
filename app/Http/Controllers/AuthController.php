@@ -33,10 +33,6 @@ class AuthController extends Controller
         return view('admin.akun', ['data' => $akun]);
     }
 
-    public function ChangeProfile($id)
-    {
-    }
-
     public function update(Request $request)
     {
         $request->validate([

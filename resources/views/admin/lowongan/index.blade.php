@@ -75,7 +75,7 @@
                     <td class="px-6 py-4">
                         @foreach($bobotLowker as $bobotLowkers)
                         @if($bobotLowkers->lowongan_id === $lowker->id)
-                        {{ $bobotLowkers->kriterias->kriteria }}
+                            {{ $bobotLowkers->kriterias->kriteria }}
                         @endif
                         @endforeach
                     </td>
@@ -121,7 +121,7 @@
                                     <div>
                                         <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Divisi</label>
                                         <select id="divisi" name="divisi_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option seelcted value="{{ $lowker->divisi_id }}">{{ $lowker->divisis->divisi }}</option>
+                                            <option selected value="{{ $lowker->divisi_id }}">{{ $lowker->divisis->divisi }}</option>
                                             <option disabled>Choose a Divisi</option>
                                             @foreach($divisi as $div)
                                             <option value="{{ $div->id }}">{{ $div->divisi }}</option>

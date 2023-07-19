@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\bobotLowker;
 use App\Models\hasilSaw;
-use App\Models\kriteria;
 use App\Models\lowongan;
 use App\Models\Opsi;
 use App\Models\pelamar;
@@ -40,42 +39,6 @@ class PenilaianController extends Controller
                 }
             }
         }
-        // if ($dataSAW) {
-        //     foreach ($pendaftaran as $pendaftar) {
-        //         $akhir = 0;
-        //         foreach ($dataSAW as $key) {
-
-        //             if ($key['id'] == $pendaftar->pelamar_id) {
-        //                 // Memeriksa apakah ID sudah ada dalam $dataBaru sebelum menambahkannya
-        //                 $found = false;
-        //                 $akhir += $key['hasil_saw'];
-        //                 foreach ($dataBaru as $item) {
-        //                     if ($item['pelamar_id'] == $key['id']) {
-        //                         $found = true;
-        //                         break;
-        //                     }
-        //                 }
-        //                 // Jika ID belum ada dalam $dataBaru, tambahkan data baru
-        //                 if (!$found) {
-        //                     $dataBaru[] = [
-        //                         'pelamar_id' => $key['id'],
-        //                         'name' => $key['name'],
-        //                         'hasil_saw' => $akhir
-        //                     ];
-        //                 }
-        //                 if($found){
-        //                     $dataBaru['hasil_saw'] = $akhir;
-        //                 }
-        //             }
-        //         }
-        //         hasilSaw::updateOrCreate(
-        //             ['pelamar_id' => $pendaftar->pelamar_id],
-        //             ['hasil' => $akhir]
-        //         );
-        //     }
-        //     dd($dataBaru);
-        //     die;
-        // }
         if ($dataSAW) {
             foreach ($pendaftaran as $pendaftar) {
                 $akhir = 0;
@@ -115,19 +78,13 @@ class PenilaianController extends Controller
                     $ranking++;
                 }
                 $topThree = array_slice($dataBaru, 0, $lowker->batas_diterima);
-                // foreach ($topThree as $item) {
-                //     echo "Peringkat: " . $item['ranking'] . "\n";
-                //     echo "Nama: " . $item['name'] . "\n";
-                //     // Tambahkan informasi lain yang ingin ditampilkan dalam kesimpulan
-                //     echo "\n";
-                // }
                 hasilSaw::updateOrCreate(
                     ['pelamar_id' => $pendaftar->pelamar_id],
                     ['hasil' => $akhir]
                 );
             }
         }
-
+        // dd($dataBaru);
         $array = [
             'lowker' => $lowker,
             'pelamar' => $pelamar,

@@ -60,7 +60,6 @@
                         {{ $pelamars->pendaftarans->status }}
                     </td>
                     <td class="px-6 py-4x space-x-3">
-                        {{-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
                         <a href="{{ route('pelamar.destroy',['id' => $pelamars->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Hapus</a>
                         <a href="#" data-modal-target="detail-modal{{ $pelamars->id }}" data-modal-toggle="detail-modal{{ $pelamars->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
                     </td>
